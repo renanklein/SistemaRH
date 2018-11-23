@@ -46,7 +46,7 @@ public class Concurso {
 			vagas_conc.put(e,vagas_espec);
 			//Carregando o objeto que contem as informacoes da classificacao da esp
 			Muda_Estado classif_esp;
-			ArrayList<Candidato> cand_esp = new ArrayList();
+			ArrayList<Candidato> cand_esp = new ArrayList<Candidato>();
 			//Verificando a especialidade dos candidatos
 			cand_conc.forEach(candidato ->{
 				if(candidato.getCad_esp().equals(e)) {
