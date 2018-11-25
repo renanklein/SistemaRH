@@ -14,6 +14,9 @@ public class Vaga {
 	public String getStatus() {
 		return this.status_vaga;
 	}
+	public Historico_Vaga getHist() {
+		return this.hist;
+	}
 	public void setStatus(String status) {
 		this.status_vaga = status;
 	}

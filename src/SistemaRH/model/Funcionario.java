@@ -19,14 +19,12 @@ public class Funcionario extends Pessoa{
 		return novaVaga;
 	}
 	@Override
-	public String MudarStatus(String status) {
+	public void MudarStatus(String status) {
 		if(status.equals("Inativo")) {
 			this.status = status;
 			//Gerar ação para a transferencia do funcionário para o quadro de inativos
-			
-			
 		}
-		return "Menssagem de requerimento de vacância";
+		//Gerar mensagem de vacancia
 	}
 
 }

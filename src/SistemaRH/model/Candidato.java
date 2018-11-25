@@ -12,9 +12,9 @@ public class Candidato extends Pessoa implements Comparator{
 		return novoFunc;
 	}
 	@Override
-	public String MudarStatus(String status) {
+	public void MudarStatus(String status) {
 		// TODO Auto-generated method stub
-		return "";
+		this.status = status;
 		
 	}
 	// Para a implementacao de collections

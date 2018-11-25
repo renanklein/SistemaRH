@@ -43,5 +43,23 @@ public class Muda_Estado {
 			return false;
 		return true;
 	}
+	public Especialidade getConcurso_Especialidade() {
+		return Concurso_Especialidade;
+	}
+	public void setConcurso_Especialidade(Especialidade concurso_Especialidade) {
+		Concurso_Especialidade = concurso_Especialidade;
+	}
+	public TreeSet<Candidato> getCand_classif() {
+		return cand_classif;
+	}
+	public void setCand_classif(TreeSet<Candidato> cand_classif) {
+		this.cand_classif = cand_classif;
+	}
+	public String getProcesso_concurso() {
+		return processo_concurso;
+	}
+	public void setProcesso_concurso(String processo_concurso) {
+		this.processo_concurso = processo_concurso;
+	}
 	
 }
