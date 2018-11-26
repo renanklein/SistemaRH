@@ -129,7 +129,15 @@ public class Concurso {
 			//Retirando a vaga ocupada das devidas colecoes
 			//Pegando a colecao de vagas que correponde a especialidade do candidato
 			ArrayList<Vaga> vagas_esp = vagas_conc.get(c_select.getCad_esp());
-			//Continua ... 
+			//Verificando qual vaga tem o candidato selecionado no topo da pilha de seu historico
+			ListIterator<Vaga> it = vagas_esp.listIterator();
+			boolean achou_cand = false;
+			while(it.hasNext() && !achou_cand) {
+				if(it.next().getHist().getCandidatos_hist().peek().equals(c_select)){
+					//Removendo a vaga da colecao e a reescrevendo no HashMap
+					//Continua...
+				}
+			}
 		}
 	}
 }

@@ -2,7 +2,7 @@ package SistemaRH.model;
 
 import java.util.Comparator;
 
-public class Candidato extends Pessoa implements Comparator{
+public class Candidato extends Pessoa implements Comparator<Object>{
 	private String num_inscricao;
 	private Especialidade cad_esp;
 	private int classificacao;
@@ -34,4 +34,5 @@ public class Candidato extends Pessoa implements Comparator{
 	public Especialidade getCad_esp() {
 		return cad_esp;
 	}
+	
 }

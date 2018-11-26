@@ -22,5 +22,11 @@ public class Historico_Vaga {
 	public void exibeHistorico() {
 		
 	}
+	public Stack<String> getStatus_vaga() {
+		return status_vaga;
+	}
+	public Stack<Candidato> getCandidatos_hist() {
+		return candidatos_hist;
+	}
 	
 }
