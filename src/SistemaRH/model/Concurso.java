@@ -11,8 +11,6 @@ import java.util.Set;
 public class Concurso {
 	private String num_processo;
 	private String descricao;
-	private boolean prorrogavel;
-	private ArrayList<Especialidade> espec_conc;
 	private Date DT_realizacao;
 	private Date DT_validade;
 	private Set<Muda_Estado> cand_espec_classif;
@@ -23,15 +21,13 @@ public class Concurso {
 			ArrayList<Vaga> vaga_conc, ArrayList<Candidato> cand_conc,Date dt_rea,Date dt_vali) {
 		this.num_processo = numP;
 		this.descricao = des;
-		this.prorrogavel = p;
 		this.DT_realizacao = dt_rea;
 		this.DT_validade = dt_vali;
-		this.espec_conc = esp_conc;
 		
 		//Loading dos atributos vagas_conc e cand_espec_classif
 		vagas_conc = new HashMap<Especialidade,ArrayList<Vaga>>();
-		cand_espec_classif = new HashSet<Muda_Estado> ();
-		for(Especialidade e: espec_conc) {
+		cand_espec_classif = new HashSet<Muda_Estado>();
+		for(Especialidade e: esp_conc) {
 			//Carregando um array de vagas que correspondem a especialidade
 			ArrayList<Vaga> vaga_esp = new ArrayList<Vaga>();
 			vaga_conc.forEach(vaga ->{
@@ -62,7 +58,6 @@ public class Concurso {
 			classif_esp = new Muda_Estado(this.num_processo,e,cand_esp);
 			//Adicionando o objeto a colecao
 			cand_espec_classif.add(classif_esp);
-			espec_conc.remove(e);
 			//Seja Feliz
 		}
 	}
@@ -82,7 +77,7 @@ public class Concurso {
 		return true;
 	}
 	
-	public Candidato chamaCandidato(Especialidade esp_cand) {
+	public Candidato selecionaCandidato(Especialidade esp_cand) {
 		//Logica do Caso de Uso RH3
 		//Pegando a colecao de vagas da referida especialidade
 		ArrayList<Vaga> vagas_esp = vagas_conc.get(esp_cand);
@@ -126,16 +121,19 @@ public class Concurso {
 			 * já foi retirado da relacao de classificacao da especilidade
 			 * na qual ele se inscreveu
 			*/ 
-			//Retirando a vaga ocupada das devidas colecoes
 			//Pegando a colecao de vagas que correponde a especialidade do candidato
 			ArrayList<Vaga> vagas_esp = vagas_conc.get(c_select.getCad_esp());
 			//Verificando qual vaga tem o candidato selecionado no topo da pilha de seu historico
 			ListIterator<Vaga> it = vagas_esp.listIterator();
 			boolean achou_cand = false;
 			while(it.hasNext() && !achou_cand) {
-				if(it.next().getHist().getCandidatos_hist().peek().equals(c_select)){
-					//Removendo a vaga da colecao e a reescrevendo no HashMap
-					//Continua...
+				Vaga v = it.next();
+				if(v.getHist().getCandidatos_hist().peek().equals(c_select)){
+					//Alterando o status da vaga
+					v.setStatus("Ocupada");
+					//Alterando dados da especialidade na qual o candidato se inscreveu
+					Set<Especialidade> esp_conc = vagas_conc.keySet();
+					
 				}
 			}
 		}
