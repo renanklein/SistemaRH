@@ -62,7 +62,7 @@ public abstract class Pessoa {
 	public String getStatus() {
 		return status;
 	}
-	public abstract void MudarStatus(String status);
+	public abstract void setStatus(String status);
 
 	@Override
 	public int hashCode() {
