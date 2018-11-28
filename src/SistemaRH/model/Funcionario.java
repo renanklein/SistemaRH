@@ -10,16 +10,15 @@ public class Funcionario extends Pessoa{
 	private Vaga vaga_func;
 	private Date data_portaria;
 	
-	public Vaga gerar_vaga() {
-		//Após confirmação para gerar vacância
-		Vaga novaVaga = new Vaga();
-		novaVaga.setStatus("Desocupada");
-		novaVaga.setProcesso("Numero do concurso que do funcionario, se ainda válido");
-		
-		return novaVaga;
+	public Funcionario(String matri,String status,String nome,String CPF){
+		this.matricula = matri;
+		this.status = status;
+		this.setNome(nome);
+		this.setCPF(CPF);
 	}
+	
 	@Override
-	public void MudarStatus(String status) {
+	public void setStatus(String status) {
 		if(status.equals("Inativo")) {
 			this.status = status;
 			//Gerar ação para a transferencia do funcionário para o quadro de inativos

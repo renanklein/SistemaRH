@@ -11,11 +11,8 @@ import java.util.Set;
 public class Concurso {
 	private String num_processo;
 	private String descricao;
-	private boolean prorrogavel;
-	private ArrayList<Especialidade> espec_conc;
 	private Date DT_realizacao;
 	private Date DT_validade;
 	private Set<Muda_Estado> cand_espec_classif;
 	private HashMap<Especialidade,ArrayList<Vaga>> vagas_conc;
 	
-	}
