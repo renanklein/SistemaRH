@@ -16,5 +16,3 @@ public class Concurso {
 	private Set<Muda_Estado> cand_espec_classif;
 	private HashMap<Especialidade,ArrayList<Vaga>> vagas_conc;
 	
-	
-}
