@@ -9,22 +9,25 @@ public class Funcionario extends Pessoa{
 	private String unidade;
 	private Vaga vaga_func;
 	private Date data_portaria;
+	private boolean status;
 	
-	public Funcionario(String matri,String status,String nome,String CPF){
-		this.matricula = matri;
+	public Funcionario(String mat, String cpf, String nome, boolean status) {
+		super.setNome(nome);
+		super.setCPF(cpf);
+		this.matricula = mat;
 		this.status = status;
-		this.setNome(nome);
-		this.setCPF(CPF);
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	
 	}
 	
-	@Override
-	public void setStatus(String status) {
-		if(status.equals("Inativo")) {
-			this.status = status;
-			//Gerar ação para a transferencia do funcionário para o quadro de inativos
-		}
-		//Gerar mensagem de vacancia
-	}
+	
 
 }
 
