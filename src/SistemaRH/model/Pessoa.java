@@ -57,8 +57,5 @@ public abstract class Pessoa {
 	public void setCod_concurso(String cod_concurso) {
 		this.cod_concurso = cod_concurso;
 	}
-
-	
-
 	
 }

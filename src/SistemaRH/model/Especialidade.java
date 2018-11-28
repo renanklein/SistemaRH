@@ -38,6 +38,42 @@ public class Especialidade {
 		}
 		return true;
 	}
+	public int getVagas_iniciais() {
+		return vagas_iniciais;
+	}
+	public void setVagas_iniciais(int vagas_iniciais) {
+		this.vagas_iniciais = vagas_iniciais;
+	}
+	public int getVagas_amplicadas() {
+		return vagas_amplicadas;
+	}
+	public void setVagas_amplicadas(int vagas_amplicadas) {
+		this.vagas_amplicadas = vagas_amplicadas;
+	}
+	public int getQtd_aprovados() {
+		return qtd_aprovados;
+	}
+	public void setQtd_aprovados(int qtd_aprovados) {
+		this.qtd_aprovados = qtd_aprovados;
+	}
+	public int getQtd_nomeados() {
+		return qtd_nomeados;
+	}
+	public void setQtd_nomeados(int qtd_nomeados) {
+		this.qtd_nomeados = qtd_nomeados;
+	}
+	public int getQtd_exonerados() {
+		return qtd_exonerados;
+	}
+	public void setQtd_exonerados(int qtd_exonerados) {
+		this.qtd_exonerados = qtd_exonerados;
+	}
+	public int getCand_restantes() {
+		return cand_restantes;
+	}
+	public void setCand_restantes(int cand_restantes) {
+		this.cand_restantes = cand_restantes;
+	}
 	
 	
 	

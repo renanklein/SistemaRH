@@ -24,6 +24,7 @@ public class Funcionario extends Pessoa{
 
 	public void setStatus(boolean status) {
 		this.status = status;
+	
 	}
 	
 	
