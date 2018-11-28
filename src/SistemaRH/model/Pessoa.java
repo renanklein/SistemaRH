@@ -9,8 +9,7 @@ public abstract class Pessoa {
 	private String etnia;
 	private boolean PCD;
 	private String cod_concurso;
-	protected String status;
-	
+		
 	public String getNome() {
 		return nome;
 	}
@@ -59,40 +58,7 @@ public abstract class Pessoa {
 		this.cod_concurso = cod_concurso;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-	public abstract void MudarStatus(String status);
+	
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((CPF == null) ? 0 : CPF.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof Pessoa))
-			return false;
-		Pessoa other = (Pessoa) obj;
-		if (CPF == null) {
-			if (other.CPF != null)
-				return false;
-		} else if (!CPF.equals(other.CPF))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		return true;
-	}
 	
 }

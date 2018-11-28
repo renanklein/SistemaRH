@@ -6,6 +6,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import SistemaRH.BDconfig.UsuarioBD;
+import SistemaRH.model.Funcionario;
 
 /**
  * Servlet implementation class InativaServlet
@@ -32,14 +36,12 @@ public class InativaServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String nome = request.getParameter("matricula");
-		
-		UsuarioBD.addContato(nome, telefone, email);
-		LinkedList<Contato> lContatos = UsuarioBD.listarContatos();
+		String mat = request.getParameter("matricula");
+		Funcionario func = UsuarioBD.consultaFunc(mat);
 		HttpSession session =  request.getSession();
-		session.setAttribute("contatos", lContatos);
+		session.setAttribute("func", func);
 		response.sendRedirect("res.jsp");
+
 	}
 
 }
