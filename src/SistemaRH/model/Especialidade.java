@@ -38,6 +38,24 @@ public class Especialidade {
 		}
 		return true;
 	}
+	public String getPerfil() {
+		return perfil;
+	}
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
+	}
+	public String getNome_espec() {
+		return nome_espec;
+	}
+	public void setNome_espec(String nome_espec) {
+		this.nome_espec = nome_espec;
+	}
+	public String getRegiao() {
+		return regiao;
+	}
+	public void setRegiao(String regiao) {
+		this.regiao = regiao;
+	}
 	public int getVagas_iniciais() {
 		return vagas_iniciais;
 	}
@@ -55,6 +73,12 @@ public class Especialidade {
 	}
 	public void setQtd_aprovados(int qtd_aprovados) {
 		this.qtd_aprovados = qtd_aprovados;
+	}
+	public int getVacancias() {
+		return vacancias;
+	}
+	public void setVacancias(int vacancias) {
+		this.vacancias = vacancias;
 	}
 	public int getQtd_nomeados() {
 		return qtd_nomeados;
@@ -74,7 +98,5 @@ public class Especialidade {
 	public void setCand_restantes(int cand_restantes) {
 		this.cand_restantes = cand_restantes;
 	}
-	
-	
 	
 }
