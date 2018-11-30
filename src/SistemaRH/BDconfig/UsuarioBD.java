@@ -12,7 +12,7 @@ import SistemaRH.model.Vaga;
 
 public class UsuarioBD {
 	
-	//Os dois primeiros mÈtodos est„o relacionados com o caso de uso RH1
+	//Os dois primeiros m√©todos est√£o relacionados com o caso de uso RH1
 	public static synchronized Funcionario consultaFunc(String mat) {
 		try {
 			ConexaoBD a = new ConexaoBD();
@@ -55,7 +55,7 @@ public class UsuarioBD {
 		return true;
 	}
 	// Metodo(s) relacionados ao caso de uso RH2
-	public static synchronized Vaga criaVaga(String num_processo,String nome_especialidade)  {
+	/*public static synchronized Vaga criaVaga(String num_processo,String nome_especialidade)  {
 		Vaga v;
 		try {
 			ConexaoBD a = new ConexaoBD();
@@ -73,7 +73,7 @@ public class UsuarioBD {
 			v = new Vaga();
 			/*Acessando o banco de dados para receber informacoes da especialidade e carrega-los no
 			 * objeto vaga*/ 
-			ps = (PreparedStatement) c.prepareStatement("SELECT * FROM concurso_especialidade as ce WHERE ce.cd_processo = ? ");
+			/*ps = (PreparedStatement) c.prepareStatement("SELECT * FROM concurso_especialidade as ce WHERE ce.cd_processo = ? ");
 			ps.setString(1,num_processo);
 			rs = ps.executeQuery();
 			Especialidade esp = new Especialidade();
@@ -94,7 +94,7 @@ public class UsuarioBD {
 			s.getStackTrace();
 			return null;
 		}
-		return v;
+		return v;*/
 	}
 
 }
