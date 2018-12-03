@@ -7,15 +7,18 @@ public class Funcionario extends Pessoa{
 	private Calendar data_admissao;
 	private Calendar data_desligamento;
 	private String unidade;
+	private int idVaga;
+	private Date data_portaria;
 	private Vaga vaga_func;
 	private Calendar data_portaria;
 	private boolean status;
 	
-	public Funcionario(String mat, String cpf, String nome, boolean status) {
+	public Funcionario(String mat, String cpf, String nome, boolean status, int vaga) {
 		super.setNome(nome);
 		super.setCPF(cpf);
 		this.matricula = mat;
 		this.status = status;
+		this.idVaga = vaga;
 	}
 
 	public String getMatricula() {
@@ -82,9 +85,34 @@ public class Funcionario extends Pessoa{
 		this.status = status;
 	}
 
-	
-	
-	
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public Especialidade getEsp_func() {
+		return esp_func;
+	}
+
+	public Date getData_admissao() {
+		return data_admissao;
+	}
+
+	public Date getData_desligamento() {
+		return data_desligamento;
+	}
+
+	public String getUnidade() {
+		return unidade;
+	}
+
+	public int getIdVaga() {
+		return idVaga;
+	}
+
+	public Date getData_portaria() {
+		return data_portaria;
+	}
 
 }
 
