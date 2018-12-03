@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import com.mysql.jdbc.Connection;
 
 public class ConexaoBD {
+
 	private Connection con;
 	
 	public void iniciaBd(){
@@ -31,5 +32,6 @@ public class ConexaoBD {
 	public Connection getConexao(){
 		return con;
 	}
+
 
 }

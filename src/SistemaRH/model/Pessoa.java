@@ -1,10 +1,11 @@
 package SistemaRH.model;
 
 import java.sql.Date;
+import java.util.Calendar;
 
 public abstract class Pessoa {
 	private String nome;
-	private Date data_nascimento;
+	private Calendar data_nascimento;
 	private String CPF;
 	private String etnia;
 	private boolean PCD;
@@ -18,11 +19,11 @@ public abstract class Pessoa {
 		this.nome = nome;
 	}
 
-	public Date getData_nascimento() {
+	public Calendar getData_nascimento() {
 		return data_nascimento;
 	}
 
-	public void setData_nascimento(Date data_nascimento) {
+	public void setData_nascimento(Calendar data_nascimento) {
 		this.data_nascimento = data_nascimento;
 	}
 
@@ -57,8 +58,5 @@ public abstract class Pessoa {
 	public void setCod_concurso(String cod_concurso) {
 		this.cod_concurso = cod_concurso;
 	}
-
-	
-
 	
 }
