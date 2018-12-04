@@ -38,45 +38,42 @@ public class UsuarioBD {
 		}
 
 	}
-	public static synchronized boolean exoneraFunc(Funcionario func){
+	public static synchronized boolean exoneraFunc(String mat){
 		try {
 			ConexaoBD a = new ConexaoBD();
 			a.iniciaBd();
 			Connection c = a.getConexao();
+			Funcionario func = UsuarioBD.consultaFunc(mat);
 			PreparedStatement ps= (PreparedStatement) c.prepareStatement("BEGIN");
 			ps.executeQuery();
 			ps = (PreparedStatement) c.prepareStatement("UPDATE funcionario SET status = 0 WHERE id_matricula = ?");
 			ps.setString(1, func.getMatricula());
 			ps.executeQuery();
-			ps = (PreparedStatement) c.prepareStatement("UPDATE `concurso_vaga` SET `st_ocupada`= 0 WHERE id_vaga = ?");
+			ps = (PreparedStatement) c.prepareStatement("UPDATE  concurso_vaga  SET  st_ocupada = 0 WHERE id_vaga = ?");
 			ps.setInt(1, func.getIdVaga());
 			ps.executeQuery();
-			ps = (PreparedStatement) c.prepareStatement("INSERT INTO `concurso_vaga_historico`(`id_nu_vaga`,`dt_atualizacao`, `id_situacao`) VALUES (?, ?, 1)");
+			ps = (PreparedStatement) c.prepareStatement("INSERT INTO `concurso_vaga_historico ( id_nu_vaga , dt_atualizacao ,  id_situacao ) VALUES (?, ?, 1)");
+			//Obtendo o objeto Calendar com a data/horario atual e convertendo para tipo Date da biblioteca java.sql
+			//OBS: Estou utilizando a Classe Calendar pois ela é mais facil de ser manipulada
+			//Atualizando a data de exoneracao
+			Calendar ca = Calendar.getInstance();
+			//Setando a data de desligamento no objeto func
+			func.setData_desligamento(ca);
+			//Criando o date para passar como parâmetro da query acima
+			Date d = (Date) func.getData_desligamento().getTime();
+			//Atriubindo os valores das variaveis na query (?)
 			ps.setInt(1, func.getIdVaga());
-			ps.setString(2, " ");
+			ps.setDate(2,d);
 			ps.executeQuery();
 			ps= (PreparedStatement) c.prepareStatement("COMMIT");
 			//Atualizando o status da vaga que o funcionario ocupava
-			Funcionario func = UsuarioBD.consultaFunc(mat);
 			func.getVaga_func().getHist().atualiza_historico(func);
-			//Atualizando a data de exoneracao
-			Calendar ca = Calendar.getInstance();
+		
 			func.setData_desligamento(ca);
 			//Atualizando status da vaga que estava ocupada
 			func.getVaga_func().getHist().atualiza_historico(func);
 			//Atualizando seu status
 			func.setStatus(false);
-			//Persistindo as mudanca no bd
-			//Status...
-			PreparedStatement ps = (PreparedStatement) c.prepareStatement("UPDATE funcionario SET status = ? WHERE id_matricula = ?");
-			ps.setString(1, mat);
-			ps.executeQuery();
-			//Status da vaga e data de exoneracao
-			Date d = (Date) func.getData_desligamento().getTime();
-			ps = (PreparedStatement) c.prepareStatement("UPDATE concurso_historico_vaga SET dt_atualizacao = ?  WHERE cd_cpf = ?");
-			ps.setDate(1,d);
-			//OBS : Nao ha campo no modelo do bd para alterar o status da vaga
-			ps.setString(2, func.getCPF());
 			
 			ps.close();
 			c.close();
@@ -143,10 +140,10 @@ public class UsuarioBD {
 			Connection c = a.getConexao();
 			//Descobrindo o cpf do primeiro candidato a ser chamado
 			PreparedStatement ps = (PreparedStatement) c.prepareStatement("SELECT cc.cd_cpf FROM concurso_candidato as cc,concurso_especialidade as ce "
-					+ "WHERE ce.ds_perfil = ? and cc.min(nu_candidato_posicao)"
-					+ "JOIN concurso_candidato_situacao_tipo as ct on cc.id_situacao = ct.id_candidato_situacao and ct.ds_situacao = 'Em espera'");
-			//OBS:Verificar se o status do candidado ainda nao selecionada e 'Em espera'
-			//Perfil = nome da especialidade?
+					+ "WHERE ce.ds_especialidade = ? and cc.min(nu_candidato_posicao)"
+					+ "JOIN concurso_candidato_historico as ch ON cc.id_situacao = ch.id_situacao_nova"
+					+ "JOIN concurso_candidato_situacao_tipo as ct ON ch.id_situacao_nova = ct.candidato_situacao and ct.ds_situacao = 'Em espera'");
+			//OBS:Verificar se o status do candidado ainda nao selecionado e 'Em espera'
 			ps.setString(1,esp);
 			ResultSet rs =  ps.executeQuery();
 			cpf = rs.getString("cd_cpf");
@@ -169,31 +166,56 @@ public class UsuarioBD {
 			ConexaoBD a = new ConexaoBD();
 			a.iniciaBd();
 			Connection c = a.getConexao();
-			/*Alterando o status do candidato nas tabelas concurso_candidato_situacao_tipo 
-			 * e concurso_candidato_historico. Tambem alterando a data */
+			//Alterando o status do candidato nas tabelas concurso_candidato_situacao_tipo 
+			PreparedStatement ps = (PreparedStatement) c.prepareStatement("UPDATE concurso_candidato_situacao_tipo ct"
+					+ "JOIN concurso_candidato_historico cch ON cch.id_situacao_nova = ct.id_candidato_situacao"
+					+ "SET ct.ds_situacao = 'Selecionado"
+					+ "WHERE concurso_candidato.cd_cpf = ? and cch.cd_cpf = concurso_candidato.cd_cpf ");
+			ps.setString(1, cpf);
+			ps.executeQuery();
+			//Agora alterando a data nova mundaca na tabela concurso_candidato_historico
 			Calendar ca = Calendar.getInstance();
 			Date d = (Date) ca.getTime();
-			PreparedStatement ps = (PreparedStatement) c.prepareStatement("UPDATE concurso_candidato_historico "
-					+ "SET ds_situacao_antiga = 'Em espera',ds_situacao_nova = 'Selecionado', dt_mudancao_situacao = ?"
+			ps = (PreparedStatement) c.prepareStatement("UPDATE concurso_candidato_historico "
+					+ "SET dt_mudancao_situacao = ?"
 					+ "WHERE cd_cpf = ?");
-			//OBS:Os campos de status da tabela de historico estao como Int, para executar a mudanca acima deve altera-los para VARCHAR
 			ps.setDate(1, d);
 			ps.setString(2, cpf);
-			ps.executeQuery();
-			//Agora a table situacao tipo
-			ps = (PreparedStatement) c.prepareStatement("UPDATE concurso_candidato_situacao_tipo ct"
-					+ "JOIN concurso_candidato cc ON cc.id_situacao = ct.id_candidato_situacao"
-					+ "SET ct.ds_situacao = 'Selecionado");
 			ps.executeQuery();
 			//Montando o objeto Candidato
 			//Especialidade ...
 			Especialidade espec = new Especialidade();
-			ps = (PreparedStatement) c.prepareStatement("SELECT * FROM concurso_especialidade as ce WHERE ");
+			ps = (PreparedStatement) c.prepareStatement("SELECT * FROM concurso_especialidade as ce WHERE ce.ds_especialidade = ?");
+			ps.setString(1,esp);
+			ResultSet rs = ps.executeQuery();
+			espec.setPerfil(rs.getString("ds_perfil"));
+			espec.setNome_espec(rs.getString("ds_especialidade"));
+			espec.setRegiao(rs.getString("ds_regiao"));
+			espec.setVagas_iniciais(rs.getInt("nu_vagas_iniciais"));
+			espec.setVagas_amplicadas(rs.getInt("nu_vagas_amplidadas"));
+			espec.setQtd_aprovados(rs.getInt("nu_aprovados"));
+			espec.setVacancias(rs.getInt("nu_vacancias"));
+			espec.setQtd_nomeados(rs.getInt("nu_nomeados"));
+			espec.setQtd_exonerados(rs.getInt("nu_eliminados_exonerados"));
+			espec.setCand_restantes(rs.getInt("nu_banco_restante"));
+			//Pegando o nome do candango ...
+			ps = (PreparedStatement) c.prepareStatement("SELECT nm_nome_completo FROM pessoa WHERE cd_cpf = ? ");
+			rs = ps.executeQuery();
+			String nome_cand = rs.getString("nm_nome_completo");
+			//Montando o objeto candidato
+			selected = new Candidato(cpf,espec,"Selecionado",nome_cand);
+			//E isso ...
+			ps.close();
+			c.close();
+			a.fechaBd();
+			
 		}catch(SQLException s) {
 			s.getStackTrace();
 			return null;
 		}
-		return null;
+		return selected;
 	}
+	//Metodo(s) relacionado(s) ao Caso de Uso RH4
+	
 }
 
