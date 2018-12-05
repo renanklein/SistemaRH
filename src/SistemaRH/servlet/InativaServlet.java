@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import SistemaRH.BDconfig.UsuarioBD;
+import SistemaRH.BDconfig.DAO_RH1;
 import SistemaRH.model.Funcionario;
 
 /**
@@ -37,7 +37,7 @@ public class InativaServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mat = request.getParameter("matricula");
-		Funcionario func = UsuarioBD.consultaFunc(mat);
+		Funcionario func = DAO_RH1.consultaFunc(mat);
 		HttpSession session =  request.getSession();
 		session.setAttribute("func", func);
 		response.sendRedirect("res.jsp");
