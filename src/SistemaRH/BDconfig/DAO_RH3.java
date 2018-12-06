@@ -1,9 +1,7 @@
 package SistemaRH.BDconfig;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -47,27 +45,13 @@ public class DAO_RH3 {
 				ConexaoBD a = new ConexaoBD();
 				a.iniciaBd();
 				Connection c = a.getConexao();
-				//Alterando o status do candidato nas tabelas concurso_candidato_situacao_tipo 
-				PreparedStatement ps = (PreparedStatement) c.prepareStatement("UPDATE concurso_candidato_situacao_tipo ct"
-						+ "JOIN concurso_candidato_historico cch ON cch.id_situacao_nova = ct.id_candidato_situacao"
-						+ "SET ct.ds_situacao = 'Selecionado"
-						+ "WHERE concurso_candidato.cd_cpf = ? and cch.cd_cpf = concurso_candidato.cd_cpf ");
-				ps.setString(1, cpf);
-				ps.executeQuery();
-				//Agora alterando a data nova mundaca na tabela concurso_candidato_historico
-				Calendar ca = Calendar.getInstance();
-				Date d = (Date) ca.getTime();
-				ps = (PreparedStatement) c.prepareStatement("UPDATE concurso_candidato_historico "
-						+ "SET dt_mudancao_situacao = ?"
-						+ "WHERE cd_cpf = ?");
-				ps.setDate(1, d);
-				ps.setString(2, cpf);
-				ps.executeQuery();
+				//Realizando as alteracoes de status no banco de dados
+				DAO_Util.setStatusCandidato("Selecionado", cpf);
 				//Montando o objeto Candidato
 				//Especialidade ...
 				Especialidade espec = DAO_Util.getEspCand(cpf);
 				//Pegando o nome do candango ...
-				ps = (PreparedStatement) c.prepareStatement("SELECT nm_nome_completo FROM pessoa WHERE cd_cpf = ? ");
+				PreparedStatement ps = (PreparedStatement) c.prepareStatement("SELECT nm_nome_completo FROM pessoa WHERE cd_cpf = ? ");
 				ResultSet rs = ps.executeQuery();
 				String nome_cand = rs.getString("nm_nome_completo");
 				//Montando o objeto candidato

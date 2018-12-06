@@ -4,6 +4,7 @@ public class Especialidade {
 	private String perfil;
 	private String nome_espec;
 	private String regiao;
+	private int id_especialidade;
 	private int vagas_iniciais;
 	private int vagas_amplicadas;
 	private int qtd_aprovados;
@@ -97,6 +98,12 @@ public class Especialidade {
 	}
 	public void setCand_restantes(int cand_restantes) {
 		this.cand_restantes = cand_restantes;
+	}
+	public int getId_especialidade() {
+		return id_especialidade;
+	}
+	public void setId_especialidade(int id_especialidade) {
+		this.id_especialidade = id_especialidade;
 	}
 	
 }
