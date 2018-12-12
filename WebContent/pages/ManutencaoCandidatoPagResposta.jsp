@@ -1,22 +1,25 @@
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@page import="SistemaRH.model.Candidato" %>
+<!DOCTYPE html>
+<html>
 <head>
+    <meta charset="ISO-8859-1">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<link rel="icon" href="img/favicon.ico">
+	<link rel="icon" href="pages/img/favicon.ico">
 	<link rel="Stylesheet" type="text/css" href="pages/css/style.css">
 
-	<title>ManutenÃ§Ã£o de Candidatos</title>
+	<title>Manutenção de Candidato Informações</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Custom styles for this template -->
 	<link href="css/dashboard.css" rel="stylesheet">
-	
 </head>
-
 <body>
 	<nav class="navbar navbar-light fixed-top bg-light flex-md-nowrap p-0 shadow">
 		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Sistema RH UERJ</a>
@@ -42,31 +45,31 @@
 						<li class="nav-item">
 							<a class="nav-link" href="#">
 								<span data-feather="layers"></span>
-								ManutenÃ§Ã£o de Concursos
+								Manutenção de Concursos
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">
 								<span data-feather="users"></span>
-								ManutenÃ§Ã£o de FuncionÃ¡rios
+								Manutenção de Funcionários
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">
 								<span data-feather="users"></span>
-								ManutenÃ§Ã£o de Candidatos
+								Manutenção de Candidatos
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">
 								<span data-feather="users"></span>
-								ManutenÃ§Ã£o de UsuÃ¡rios
+								Manutenção de Usuários
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">
 								<span data-feather="bar-chart-2"></span>
-								RelatÃ³rios
+								Relatórios
 							</a>
 						</li>
 					</ul>
@@ -80,26 +83,65 @@
 		</div>
 
 		<!--<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>-->
+        <h5>Informações do Candidato</h5>
+		<div class="table-responsive">
+			<table class="table table-striped table-sm">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>CPF</th>
+						<th>Status</th>
+						<th>Concurso</th>
+					</tr>
+				</thead>
+				<%Candidato exibido = (Candidato) session.getAttribute("Candidato");%>
+				<tbody>
+					<!--<tr>
+						<td>JOSÉ DA SILVA</td>
+						<td>987.654.321.98</td>
+						<td>37</td>
+						<td>Convocado</td>
+						<td>123456</td>
+					</tr> -->
+					<tr>
+						<td><%=exibido.getNome() %></td>
+						<td><%=exibido.getCPF() %></td>
+						<td><%=exibido.getStatus() %></td>
+						<td><%=exibido.getCad_esp().getId_concurso() %></td>
+					</tr>
+				</tbody>
+			</table>
+        </div>
+        
+		<h2>Manutenção de Candidatos</h2>
+		<div class="table-responsive">	
 
-		<h2>ManutenÃ§Ã£o de Candidatos</h2>
-		<div class="table-responsive">				
-				<form class="formlugar" method="post" action="enviar.php" target="_blank">
-					<div class="form-group">
-						<div class="form-group col-md-6">
-							<label for="inputEmail4">Informar CPF</label>
-							<input type="cpf" class="form-control" value="" id="inputCPF4" placeholder="CPF">
-						</div>
-							<div class="form-group col-md-6">
-							<label for="inputEmail4">ID do Concurso</label>
-							<input type="idconcurso" class="form-control" value="" id="inputidconcursol4" placeholder="ID Concurso">
-							</div>
-						</div>
-						<span>
-							<a class="btn btn-primary" href="file:///C:/Users/edfelix/Documents/SistemaRH/ManutencaoCandidatoPagResposta.html" role="button" style="margin:15;">Enviar</a>
-							<a class="btn btn-danger" href="#" role="button" style="margin:15;">Apagar</a>
-						</span>				
-				</form>
+			<table class="table table-striped table-sm">
+				<div class="divform2">
+					<form class="formlugar" method="post" id="ManutencaoCandidatoResp" action="ManutencaoCandidatoRespServlet" target="_blank">
+						<label>
+							<span><p>Alterar status co candidato:</p></span>
+							<span>	
+								<select class="custom-select my-1 mr-sm-2" id="opcoes" name="opcoes">
+                                    <option value="selecione">-- Selecione --</option>
+                                    <option value="eliminado">Eliminado</option>
+								    <option value="efetivado">Efetivado</option>
+                                    <option value="selecionado">Selecionado</option>
+                                    <option value="emespesa">Em espera</option>
+                                </select>
+							</span>
+						</label>
+						<div>
+							<span>
+									<input type="submit" class="btn btn-primary" id="enviar" name="enviar" value="Enviar" style="margin:15;"/>
+									<input type="reset" class="btn btn-danger" value="Apagar" style="margin:15;"/>
+							</span>
+						</div>						
+					</form>				
+				</div>
+			</table>
 		</div>
+
 	</main>
 </div>
 </div>
@@ -149,5 +191,5 @@
     			}
     		});
     	</script>
-    </body>
-    </html>
+</body>
+</html>

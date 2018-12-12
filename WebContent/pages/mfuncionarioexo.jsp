@@ -1,27 +1,29 @@
-<!doctype html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
 <head>
+	<meta charset="ISO-8859-1">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<link rel="icon" href="pages/img/favicon.ico">
-	<link rel="Stylesheet" type="text/css" href="pages/css/style.css">
+	<link rel="icon" href="img/favicon.ico">
+	<link rel="Stylesheet" type="text/css" href="css/style.css">
 
 	<title>Sistema RH UERJ</title>
 
 	<!-- Bootstrap core CSS -->
-	<link href="pages/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Custom styles for this template -->
-	<link href="pages/css/dashboard.css" rel="stylesheet">
+	<link href="css/dashboard.css" rel="stylesheet">
 	
 </head>
-
 <body>
 	<nav class="navbar navbar-light fixed-top bg-light flex-md-nowrap p-0 shadow">
 		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Sistema RH UERJ</a>
-		<img src="pages/img/logo_uerj_cor.png" alt="" width="40" >
+		<img src="img/logo_uerj_cor.png" alt="" width="40" >
 		<ul class="navbar-nav px-3">
 			<li class="nav-item text-nowrap">
 				<a class="nav-link" href="#">Sair</a>
@@ -43,31 +45,31 @@
 						<li class="nav-item">
 							<a class="nav-link" href="#">
 								<span data-feather="layers"></span>
-								ManutenÃ§Ã£o de Concursos
+								Manutenção de Concursos
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">
 								<span data-feather="users"></span>
-								ManutenÃ§Ã£o de FuncionÃ¡rios
+								Manutenção de Funcionários
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">
 								<span data-feather="users"></span>
-								ManutenÃ§Ã£o de Candidatos
+								Manutenção de Candidatos
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">
 								<span data-feather="users"></span>
-								ManutenÃ§Ã£o de UsuÃ¡rios
+								Manutenção de Usuários
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">
 								<span data-feather="bar-chart-2"></span>
-								RelatÃ³rios
+								Relatórios
 							</a>
 						</li>
 					</ul>
@@ -126,7 +128,7 @@
 		</div>
 
 		<!--<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>-->
-        <h5>InformaÃ§Ãµes do Candidato</h5>
+        <h5>Informações do Candidato</h5>
 		<div class="table-responsive">
 			<table class="table table-striped table-sm">
 				<thead>
@@ -140,7 +142,7 @@
 				</thead>
 				<tbody>
 					<!--<tr>
-						<td>JOSÃ‰ DA SILVA</td>
+						<td>JOSÉ DA SILVA</td>
 						<td>987.654.321.98</td>
 						<td>37</td>
 						<td>Convocado</td>
@@ -256,46 +258,46 @@
 			</table>
         </div>
         
-		<h2>ManutenÃ§Ã£o de FunconÃ¡rio -> ExoneraÃ§Ã£o</h2>
+		<h2>Manutenção de Funconário -> Exoneração</h2>
 		<div class="table-responsive">	
 
 			<table class="table table-striped table-sm">
 				<div class="divform">
 					
-					<h5>Confirmar exoneraÃ§Ã£o do FuncionÃ¡rio?</h5><br>
-					<form class="formlugar" method="post" action="" target="_blank">
+					<h5>Confirmar exoneração do Funcionário?</h5><br>
+					<form class="formlugar" method="post" action="mfuncionarioexoServlet" target="_blank">
 						
 						<label>
-							<input type="radio" name="opcao" value="sim"> Sim
-  							<input type="radio" name="opcao" value="nao"> NÃ£o<br>
+							<input type="radio" id="opcao" name="opcao" value="sim"> Sim
+  							<input type="radio" id="opcao" name="opcao" value="nao"> Não<br>
 						</label>
 						<br><br>
 						<label>
-							<span><p>ComentÃ¡rio de exoneraÃ§Ã£o</p></span>
+							<span><p>Comentário de exoneração</p></span>
 						</label>
 						<br>
 						<label>
 							<span>
-								<textarea name="contatocomentario"  placehoder="ComentÃ¡rios/SugestÃ£o" required></textarea>
+								<textarea name="contatocomentario"  placehoder="Comentários/Sugestão" required></textarea>
 							</span>
 						</label>
 						
 						<!--<br>
 						<label>
 							<span>	
-								<input class="input" type="text" name="matricula" maxlength="8" placeholder="Digite a matrÃ­cula" required/>
+								<input class="input" type="text" name="matricula" maxlength="8" placeholder="Digite a matrícula" required/>
 							</span>
 						</label>	
 						<br><br>
 						<label>
-							<span><p>AÃ§Ã£o:</p></span>
+							<span><p>Ação:</p></span>
 						</label>
 						<br>
 						<label>
 							<span>	
 								<select class="input" name="acao" required>
                                     <option value="selecione">-- Selecione --</option>
-                                    <option value="exonerar">Exonerar FuncionÃ¡rio</option>
+                                    <option value="exonerar">Exonerar Funcionário</option>
 								    <option value="alterar">Alterar dados Cadastrais</option>
                                 </select>
 							</span>
@@ -303,8 +305,8 @@
 						<br>
 						<label>
 							<span>
-								<input type="submit" value="Enviar">
-								<input type="reset" value="Apagar">
+								<input type="submit" class="btn btn-primary" id="enviar" name="enviar" value="Enviar" style="margin:15;"/>
+							    <input type="reset" class="btn btn-danger" value="Apagar" style="margin:15;"/>
 							</span>
 						</label>						
 
@@ -364,5 +366,5 @@
     			}
     		});
     	</script>
-    </body>
-    </html>
+</body>
+</html>

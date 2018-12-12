@@ -1,23 +1,23 @@
-<!doctype html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
 <head>
-	<meta charset="utf-8">
+<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<link rel="icon" href="pages/img/favicon.ico">
+	<link rel="icon" href="img/favicon.ico">
 	<link rel="Stylesheet" type="text/css" href="pages/css/style.css">
 
-	<title>Manuten√ß√£o de Candidato Informa√ß√µes</title>
+	<title>ManutenÁ„o de Candidatos</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Custom styles for this template -->
 	<link href="css/dashboard.css" rel="stylesheet">
-	
 </head>
-
 <body>
 	<nav class="navbar navbar-light fixed-top bg-light flex-md-nowrap p-0 shadow">
 		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Sistema RH UERJ</a>
@@ -43,31 +43,31 @@
 						<li class="nav-item">
 							<a class="nav-link" href="#">
 								<span data-feather="layers"></span>
-								Manuten√ß√£o de Concursos
+								ManutenÁ„o de Concursos
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">
 								<span data-feather="users"></span>
-								Manuten√ß√£o de Funcion√°rios
+								ManutenÁ„o de Funcion·rios
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">
 								<span data-feather="users"></span>
-								Manuten√ß√£o de Candidatos
+								ManutenÁ„o de Candidatos
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">
 								<span data-feather="users"></span>
-								Manuten√ß√£o de Usu√°rios
+								ManutenÁ„o de Usu·rios
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">
 								<span data-feather="bar-chart-2"></span>
-								Relat√≥rios
+								RelatÛrios
 							</a>
 						</li>
 					</ul>
@@ -81,66 +81,21 @@
 		</div>
 
 		<!--<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>-->
-        <h5>Informa√ß√µes do Candidato</h5>
-		<div class="table-responsive">
-			<table class="table table-striped table-sm">
-				<thead>
-					<tr>
-						<th>Nome</th>
-						<th>CPF</th>
-						<th>ID da Vaga</th>
-						<th>Status</th>
-						<th>Concurso</th>
-					</tr>
-				</thead>
-				<tbody>
-					<!--<tr>
-						<td>JOS√â DA SILVA</td>
-						<td>987.654.321.98</td>
-						<td>37</td>
-						<td>Convocado</td>
-						<td>123456</td>
-					</tr> -->
-					<tr>
-						<td>MARIA DA SILVA</td>
-						<td>123.456.789.12</td>
-						<td>120</td>
-						<td>Convocado</td>
-						<td>123456</td>
-					</tr>
-				</tbody>
-			</table>
-        </div>
-        
-		<h2>Manuten√ß√£o de Candidatos</h2>
-		<div class="table-responsive">	
 
-			<table class="table table-striped table-sm">
-				<div class="divform2">
-					<form class="formlugar" method="post" action="enviar.php" target="_blank">
-						<label>
-							<span><p>Alterar status co candidato:</p></span>
-							<span>	
-								<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                                    <option value="selecione">-- Selecione --</option>]
-                                    <option value="eliminado">Eliminado</option>
-								    <option value="efetivado">Efetivado</option>
-                                    <option value="selecionado">Selecionado</option>
-                                    <option value="emespesa">Em espera</option>
-                                </select>
-							</span>
-						</label>
-						<div>
-							<span>
-								<a class="btn btn-primary" href="#" role="button" style="margin:15;">Enviar</a>
-								<a class="btn btn-danger" href="#" role="button" style="margin:15;">Apagar</a>
-							</span>
-						</div>						
-					</form>				
-				</div>
-			</table>
+		<h2>ManutenÁ„o de Candidatos</h2>
+		<div class="table-responsive">				
+				<form class="formlugar" id="ManutencaoCandidato" method="post" action="ManutencaoCandidatoServlet" target="_blank">
+					<div class="form-group">
+						<div class="form-group col-md-6">
+							<label for="inputEmail4">Informar CPF</label>
+							<input type="text" class="form-control" value="" id="CpfCandidato" name="CpfCandidato" placeholder="CPF">
+						</div>
+						<span>
+							<input type="submit" class="btn btn-primary" id="enviar" name="enviar" value="Enviar" style="margin:15;"/>
+							<input type="reset" class="btn btn-danger" value="Apagar" style="margin:15;"/>
+						</span>				
+				</form>
 		</div>
-
 	</main>
 </div>
 </div>
@@ -190,5 +145,5 @@
     			}
     		});
     	</script>
-    </body>
-    </html>
+</body>
+</html>

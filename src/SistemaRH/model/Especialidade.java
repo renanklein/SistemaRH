@@ -4,6 +4,7 @@ public class Especialidade {
 	private String perfil;
 	private String nome_espec;
 	private String regiao;
+	private int id_concurso;
 	private int id_especialidade;
 	private int vagas_iniciais;
 	private int vagas_amplicadas;
@@ -105,5 +106,12 @@ public class Especialidade {
 	public void setId_especialidade(int id_especialidade) {
 		this.id_especialidade = id_especialidade;
 	}
+	public int getId_concurso() {
+		return id_concurso;
+	}
+	public void setId_concurso(int id_concurso) {
+		this.id_concurso = id_concurso;
+	}
+	
 	
 }

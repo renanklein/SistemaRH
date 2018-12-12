@@ -35,6 +35,7 @@ public class DAO_Util {
 			espec.setQtd_nomeados(rs.getInt("nu_nomeados"));
 			espec.setQtd_exonerados(rs.getInt("nu_eliminados_exonerados"));
 			espec.setCand_restantes(rs.getInt("nu_banco_restante"));
+			espec.setId_concurso(rs.getInt("cd_processo"));
 			ps.close();
 			c.close();
 			a.fechaBd();
