@@ -96,4 +96,24 @@
     <servlet-name>ManutencaoCandidatoRespServlet</servlet-name>
     <url-pattern>/ManutencaoCandidatoRespServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>mfuncionarioServlet</display-name>
+    <servlet-name>mfuncionarioServlet</servlet-name>
+    <servlet-class>SistemaRH.servlet.mfuncionarioServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>mfuncionarioServlet</servlet-name>
+    <url-pattern>/mfuncionarioServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>mfuncionarioexoServlet</display-name>
+    <servlet-name>mfuncionarioexoServlet</servlet-name>
+    <servlet-class>SistemaRH.servlet.mfuncionarioexoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>mfuncionarioexoServlet</servlet-name>
+    <url-pattern>/mfuncionarioexoServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -42,19 +42,19 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="mconcurso.jsp">
 								<span data-feather="layers"></span>
 								Manutenção de Concursos
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="mfuncionario.jsp">
 								<span data-feather="users"></span>
 								Manutenção de Funcionários
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="ManutencaoCandidato.jsp">
 								<span data-feather="users"></span>
 								Manutenção de Candidatos
 							</a>
@@ -134,7 +134,7 @@
 			<table class="table table-striped table-sm">
 				<div class="divform">
 					<h5>Entre com os dados do Funciónário logo abaixo:</h5><br><br>
-					<form class="formlugar" id="mfuncionario" method="post" action="mfuncionarioServlet" target="_blank">
+					<form class="formlugar" id="mfuncionario" method="get" action="mfuncionarioServlet" target="_blank">
 						
 						<label>
 							<span><p>Matrícula do Funcionário:</p></span>

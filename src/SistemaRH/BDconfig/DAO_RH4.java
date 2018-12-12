@@ -1,5 +1,4 @@
 package SistemaRH.BDconfig;
-
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;

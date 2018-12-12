@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="SistemaRH.model.Funcionario" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,19 +44,19 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="mconcurso.jsp">
 								<span data-feather="layers"></span>
 								Manutenção de Concursos
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="mfuncionario.jsp">
 								<span data-feather="users"></span>
 								Manutenção de Funcionários
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="ManutencaoCandidato.jsp">
 								<span data-feather="users"></span>
 								Manutenção de Candidatos
 							</a>
@@ -141,6 +142,8 @@
 					</tr>
 				</thead>
 				<tbody>
+				<%Funcionario exo = (Funcionario) session.getAttribute("Funcionario"); %>
+				<%String status = (String) session.getAttribute("status"); %>
 					<!--<tr>
 						<td>JOSÉ DA SILVA</td>
 						<td>987.654.321.98</td>
@@ -149,11 +152,11 @@
 						<td>123456</td>
 					</tr> -->
 					<tr>
-						<td>MARIA DA SILVA</td>
-						<td>123.456.789.12</td>
-						<td>120</td>
-						<td>Convocado</td>
-						<td>123456</td>
+						<td><%=exo.getNome() %></td>
+						<td><%=exo.getCPF() %></td>
+						<td><%=exo.getIdVaga() %></td>
+						<td><%=status %></td>
+						<td><%=exo.getCod_concurso() %></td>
 					</tr>
 					<!--
 					<tr>
@@ -258,7 +261,7 @@
 			</table>
         </div>
         
-		<h2>Manutenção de Funconário -> Exoneração</h2>
+		<h2>Manutenção de Funcionário -> Exoneração</h2>
 		<div class="table-responsive">	
 
 			<table class="table table-striped table-sm">
@@ -273,12 +276,12 @@
 						</label>
 						<br><br>
 						<label>
-							<span><p>Comentário de exoneração</p></span>
+							<span><p>Comentário de exoneração:</p></span>
 						</label>
 						<br>
 						<label>
 							<span>
-								<textarea name="contatocomentario"  placehoder="Comentários/Sugestão" required></textarea>
+								<textarea name="contatocomentario" id="contatocomentario"  placehoder="Comentários/Sugestão" required></textarea>
 							</span>
 						</label>
 						

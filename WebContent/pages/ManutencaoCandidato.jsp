@@ -41,19 +41,19 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="mconcusos.jsp">
 								<span data-feather="layers"></span>
 								Manutenção de Concursos
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="mfuncionario.jsp">
 								<span data-feather="users"></span>
 								Manutenção de Funcionários
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">
+							<a class="nav-link" href="ManutencaoCandidato.jsp">
 								<span data-feather="users"></span>
 								Manutenção de Candidatos
 							</a>
@@ -84,7 +84,7 @@
 
 		<h2>Manutenção de Candidatos</h2>
 		<div class="table-responsive">				
-				<form class="formlugar" id="ManutencaoCandidato" method="post" action="ManutencaoCandidatoServlet" target="_blank">
+				<form class="formlugar" id="ManutencaoCandidato" method="get" action="ManutencaoCandidatoServlet" target="_blank">
 					<div class="form-group">
 						<div class="form-group col-md-6">
 							<label for="inputEmail4">Informar CPF</label>

@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import SistemaRH.BDconfig.DAO_RH4;
+import SistemaRH.BDconfig.DAO_Util;
 import SistemaRH.model.Candidato;
+import SistemaRH.model.Funcionario;
 
 /**
  * Servlet implementation class ManutencaoCandidatoRespServlet
@@ -39,7 +42,20 @@ public class ManutencaoCandidatoRespServlet extends HttpServlet {
 		String status = request.getParameter("opcoes");
 		//Obtendo o objeto candidato o servlet ManutencaoCandidato
 		Candidato c = (Candidato) request.getAttribute("Cand");
-		//Continua...
+		//Realizando as devidas operacoes de acordo com o que o usuario selecionou:
+		if(status.equals("eliminado")) {
+			//Código...
+		}else if(status.equals("efetivado")) {
+			Funcionario novoFunc = DAO_RH4.candEfetivado(c, 000);
+			//OBS: Falta pensar em uma maneira de obter o id da vaga a ser preenchida pelo candidato efetivado
+			response.sendRedirect("");
+		}else if(status.equals("selecionado")) {
+			DAO_Util.setStatusCandidato("Selecionado",c.getCPF());
+			response.sendRedirect("");
+		}else if(status.equals("emespera")) {
+			DAO_Util.setStatusCandidato("Em espera",c.getCPF());
+			response.sendRedirect("");
+		}
 	}
 
 }
