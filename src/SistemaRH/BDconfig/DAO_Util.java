@@ -45,33 +45,30 @@ public class DAO_Util {
 		}
 		return espec;
 	}
-	public static synchronized Vaga getVaga(Especialidade espec,int id_vaga) {
+	public static synchronized Vaga getVaga(int id_vaga) {
 		Vaga v = null;
 		try {
 			ConexaoBD a = new ConexaoBD();
 			a.iniciaBd();
 			Connection c = a.getConexao();
-			//Fazendo a consulta no BD com o id da vaga passado como parametro
-			PreparedStatement ps = (PreparedStatement) c.prepareStatement("SELECT * FROM concurso_vaga as vh "
-					+ "JOIN concurso_especialidade as ce ON ce.id_concurso_especialidade = vh.id_concurso_especialidade"
-					+ "WHERE ce.ds_especialidade = ? and vh.nu_vaga = ?");
-			ps.setString(1,espec.getNome_espec());
-			ps.setInt(2, id_vaga);
+			//Fazendo a consulta no BD com o numero da vaga para obter o status da vaga
+			PreparedStatement ps = (PreparedStatement) c.prepareStatement("SELECT id_situacao FROM concurso_vaga_historico as vh WHERE vh.nu_vaga = ? "
+					+ "AND MIN(HOUR(TIMEDIFF(NOW(),dt_atualizacao)));");
+			ps.setInt(1, id_vaga);
 			ResultSet rs = ps.executeQuery();
 			v = new Vaga();
 			//Verificando a flag da situacao da vaga e inserindo o status correspondente
-			int id = rs.getInt("fl_vaga_ocupada");
+			int id = rs.getInt("id_situacao");
 			if(id == 1) v.setStatus("Desocupada");
 			else if(id == 2) v.setStatus("Em espera");
 			else v.setStatus("Ocupada");
 			//Atribuindo novos valores para outros atributos do objeto vaga
-			v.setVaga_espec(espec);
 			v.setHistorico(new Historico_Vaga(v));
 			v.setNum_vaga(id_vaga);
 			//Obtendo o numero do processo do concurso a qual pertence a vaga
 			ps = (PreparedStatement) c.prepareStatement("SELECT ce.cd_processo FROM concurso_especialidade as ce"
-					+ "JOIN concurso_vaga_especialidade as vt ON vt.id_concurso_especialidade = ce.id_concurso_especialidade"
-					+ "WHERE vt.id_nu_vaga = ?");
+					+ "WHERE concurso_vaga.nu_vaga = ? "
+					+ "AND concurso_vaga.id_concurso_especialidade = ce.id_concurso_especialidade");
 			ps.setInt(1, id_vaga);
 			rs = ps.executeQuery();
 			v.setProcesso(rs.getString("cd_processo"));
@@ -98,17 +95,19 @@ public class DAO_Util {
 			String status_antigo = rs.getString("ds_situacao");
 			//Persistindo esse status como  o antigo do candidato
 			ps = (PreparedStatement) c.prepareStatement("UPDATE concurso_candidato_situacao_tipo ct"
-					+ "JOIN concurso_candidato_historico cch ON cch.id_situacao_antiga = ct.id_candidato_situacao"
 					+ "SET ct.ds_situacao = ?"
-					+ "WHERE concurso_candidato.cd_cpf = ? and cch.cd_cpf = concurso_candidato.cd_cpf ");
+					+ "WHERE concurso_candidato.cd_cpf = ? "
+					+ "AND concurso_candidato_historico.cd_cpf = concurso_candidato.cd_cpf "
+					+ "AND concurso_candidato_historico.id_situacao_antida = ct.id_candidato_situacao; ");
 			ps.setString(1,status_antigo);
 			ps.setString(2, cpf);
 			ps.executeQuery();
 			//Agora persistindo no banco o novo status :
 			ps = (PreparedStatement) c.prepareStatement("UPDATE concurso_candidato_situacao_tipo ct"
-					+ "JOIN concurso_candidato_historico cch ON cch.id_situacao_nova = ct.id_candidato_situacao"
 					+ "SET ct.ds_situacao = ?"
-					+ "WHERE cch.cd_cpf = ? and cch.cd_cpf = concurso_candidato.cd_cpf ");
+					+ "WHERE concurso_candidato_historico.cd_cpf = ? "
+					+ "AND concurso_candidato_historico.cd_cpf = concurso_candidato.cd_cpf "
+					+ "AND concurso_candidato_historico.id_situacao_nova = ct.id_candidato_situacao;");
 			ps.setString(1, status);
 			ps.setString(2, cpf);
 			ps.executeQuery();
@@ -117,7 +116,7 @@ public class DAO_Util {
 			Date d = (Date) ca.getTime();
 			ps = (PreparedStatement) c.prepareStatement("UPDATE concurso_candidato_historico "
 					+ "SET dt_mudancao_situacao = ?"
-					+ "WHERE cd_cpf = ?");
+					+ "WHERE cd_cpf = ?;");
 			ps.setDate(1, d);
 			ps.setString(2, cpf);
 			ps.executeQuery();
@@ -126,6 +125,33 @@ public class DAO_Util {
 			a.fechaBd();
 		}catch(SQLException s) {
 			s.getStackTrace();		
+		}
+	}
+	public static synchronized void setStatusVaga(String status, int nu_vaga,String cpf) {
+		try {
+			ConexaoBD a = new ConexaoBD();
+			a.iniciaBd();
+			Connection c = a.getConexao();
+			//Obtendo as informacoes necessarias para inserrir uma nova alteracao no historico da vaga
+			PreparedStatement ps = (PreparedStatement) c.prepareStatement("SELECT id_vaga FROM concurso_vaga WHERE nu_vaga = ?");
+			ps.setInt(1, nu_vaga);
+			ResultSet rs = ps.executeQuery();
+			int id_vaga = rs.getInt("id_vaga");
+			//Executando a persistencia do novo status da vaga no BD
+			ps = (PreparedStatement) c.prepareStatement("INSERT INTO concurso_vaga_historico(id_vaga,dt_atualizacao,cd_cpf,id_situacao) VALUES (?,?,?,?)");
+			ps.setInt(1,id_vaga);
+			Calendar ca = Calendar.getInstance();
+			Date d = (Date) ca.getTime();
+			ps.setDate(2, d);
+			ps.setString(3, cpf);
+			//Compando a string status com o inteiro que o reprensenta no BD (id_situacao)
+			if(status.equals("Desocupada")) ps.setInt(1, 1);
+			else if(status.equals("Em espera")) ps.setInt(1, 2);
+			else if(status.equals("Ocupada")) ps.setInt(1, 3);
+			//Executando a query...
+			ps.executeUpdate();
+		}catch(SQLException s) {
+			s.getStackTrace();
 		}
 	}
 }

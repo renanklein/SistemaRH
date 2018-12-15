@@ -116,4 +116,24 @@
     <servlet-name>mfuncionarioexoServlet</servlet-name>
     <url-pattern>/mfuncionarioexoServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CandidatoSelecionadoServlet</display-name>
+    <servlet-name>CandidatoSelecionadoServlet</servlet-name>
+    <servlet-class>SistemaRH.servlet.CandidatoSelecionadoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CandidatoSelecionadoServlet</servlet-name>
+    <url-pattern>/CandidatoSelecionadoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CandidatoEfetivadoServlet</display-name>
+    <servlet-name>CandidatoEfetivadoServlet</servlet-name>
+    <servlet-class>SistemaRH.servlet.CandidatoEfetivadoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CandidatoEfetivadoServlet</servlet-name>
+    <url-pattern>/CandidatoEfetivadoServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -46,7 +46,7 @@ public class DAO_RH4 {
 		}
 		public static synchronized Funcionario candEfetivado(Candidato efetivado,int id_vaga) {
 			Funcionario novo_func = null;
-			Vaga v = DAO_Util.getVaga(efetivado.getCad_esp(), id_vaga);
+			Vaga v = DAO_Util.getVaga(id_vaga);
 			try {
 				ConexaoBD a = new ConexaoBD();
 				a.iniciaBd();
@@ -54,15 +54,9 @@ public class DAO_RH4 {
 				//Alterando o historico de status do candidato alem de seu status atual
 				DAO_Util.setStatusCandidato("Efetivado",efetivado.getCPF());
 				//Alterando o historico da vaga como ocupada no banco de dados
-				PreparedStatement ps = (PreparedStatement) c.prepareStatement("UPDATE concurso_vaga_historico as vh "
-						+ "SET vh.id_situacao= 3  "
-						+ "WHERE vh.id_nu_vaga = ? and cc.cd_cpf = ? AND concurso_candidato.id_situacao = vh.id_situacao");
-				ps.setInt(1,id_vaga);
-				ps.setString(2, efetivado.getCPF());
-				v.setStatus("Ocupada");
-				ps.executeQuery();
+				DAO_Util.setStatusVaga("Ocupado", id_vaga,efetivado.getCPF());
 				//Alerando os dados da especialidade ao qual o candidato pertence
-				ps = (PreparedStatement) c.prepareStatement("UPDATE concurso_especialidade as ce"
+				PreparedStatement ps = (PreparedStatement) c.prepareStatement("UPDATE concurso_especialidade as ce"
 						+ "SET ce.nu_nomedados = ?,ce.nu_banco_restante = ?"
 						+ "WHERE ce.id_concurso_especialidade = ?");
 				ps.setInt(1, efetivado.getCad_esp().getQtd_nomeados() + 1);
