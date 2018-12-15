@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import SistemaRH.BDconfig.DAO_RH4;
 import SistemaRH.BDconfig.DAO_Util;
@@ -43,18 +44,22 @@ public class ManutencaoCandidatoRespServlet extends HttpServlet {
 		//Obtendo o objeto candidato o servlet ManutencaoCandidato
 		Candidato c = (Candidato) request.getAttribute("Cand");
 		//Realizando as devidas operacoes de acordo com o que o usuario selecionou:
+		HttpSession session = request.getSession();
+		session.setAttribute("Candidato",c);
 		if(status.equals("eliminado")) {
-			//Código...
+			DAO_Util.setStatusCandidato("Eliminado",c.getCPF());
+			response.sendRedirect("pages/respPages/DadosCand.jsp");
 		}else if(status.equals("efetivado")) {
 			Funcionario novoFunc = DAO_RH4.candEfetivado(c, 000);
+			session.setAttribute("newFunc", novoFunc);
 			//OBS: Falta pensar em uma maneira de obter o id da vaga a ser preenchida pelo candidato efetivado
-			response.sendRedirect("");
+			response.sendRedirect("pages/respPages/CandidatoEfetivado.jsp");
 		}else if(status.equals("selecionado")) {
 			DAO_Util.setStatusCandidato("Selecionado",c.getCPF());
-			response.sendRedirect("");
+			response.sendRedirect("pages/respPages/DadosCand.jsp");
 		}else if(status.equals("emespera")) {
 			DAO_Util.setStatusCandidato("Em espera",c.getCPF());
-			response.sendRedirect("");
+			response.sendRedirect("pages/respPages/DadosCand.jsp");
 		}
 	}
 

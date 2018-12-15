@@ -29,9 +29,8 @@ public class DAO_RH4 {
 				ResultSet rs = ps.executeQuery();
 				nome = rs.getString("nm_nome_completo");
 				//Status..
-				ps = (PreparedStatement) c.prepareStatement("SELECT ct.ds_situacao FROM concurso_candidato_situacao_tipo as ct "
-						+ "JOIN concurso_candidato_historico as cc ON cc.id_situacao_nova = ct.id_candidato_situacao_tipo;"
-						+ "WHERE cc.cd_cpf = ?");
+				ps = (PreparedStatement) c.prepareStatement("SELECT ct.ds_situacao FROM concurso_candidato_situacao_tipo as ct,concurso_candidato_historico as cc"
+						+ "WHERE cc.cd_cpf = ? AND cc.id_situacao_nova = ct.id_candidato_situacao_tipo;");
 				ps.setString(1,cpf);
 				rs = ps.executeQuery();
 				status = rs.getString("ds_situacao");
@@ -56,9 +55,8 @@ public class DAO_RH4 {
 				DAO_Util.setStatusCandidato("Efetivado",efetivado.getCPF());
 				//Alterando o historico da vaga como ocupada no banco de dados
 				PreparedStatement ps = (PreparedStatement) c.prepareStatement("UPDATE concurso_vaga_historico as vh "
-						+ "JOIN concurso_candidato as cc ON cc.id_situacao = vh.id_situacao"
-						+ "SET vh.fl_vaga_ocupada = 3  "
-						+ "WHERE vh.id_nu_vaga = ? and cc.cd_cpf = ?");
+						+ "SET vh.id_situacao= 3  "
+						+ "WHERE vh.id_nu_vaga = ? and cc.cd_cpf = ? AND concurso_candidato.id_situacao = vh.id_situacao");
 				ps.setInt(1,id_vaga);
 				ps.setString(2, efetivado.getCPF());
 				v.setStatus("Ocupada");

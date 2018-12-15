@@ -11,19 +11,20 @@ import SistemaRH.model.Especialidade;
 
 public class DAO_RH3 {
 	//Metodo(s) do caso de uso RH3
-		public static synchronized String getPrimeiroCPF(String esp) {
+		public static synchronized String getPrimeiroCPF(String nome_esp) {
 			String cpf;
 			try {
 				ConexaoBD a = new ConexaoBD();
 				a.iniciaBd();
 				Connection c = a.getConexao();
 				//Descobrindo o cpf do primeiro candidato a ser chamado
-				PreparedStatement ps = (PreparedStatement) c.prepareStatement("SELECT cc.cd_cpf FROM concurso_candidato as cc,concurso_especialidade as ce "
-						+ "WHERE ce.ds_especialidade = ? and cc.min(nu_candidato_posicao)"
-						+ "JOIN concurso_candidato_historico as ch ON cc.id_situacao = ch.id_situacao_nova"
-						+ "JOIN concurso_candidato_situacao_tipo as ct ON ch.id_situacao_nova = ct.candidato_situacao and ct.ds_situacao = 'Em espera'");
+				PreparedStatement ps = (PreparedStatement) c.prepareStatement("SELECT cc.cd_cpf FROM concurso_candidato as cc "
+						+ "WHERE concurso_especialidade.ds_especialidade = ? and cc.min(nu_candidato_posicao) "
+						+ "AND cc.id_situacao = concurso_candidato_historico.id_situacao_nova "
+						+ "AND concurso_candidato_historic.id_situacao_nova = concurso_candidato_situacao_tipo.id_candidato_situacao "
+						+ "AND concurso_candidato_situacao_tipo.ds_situacao = 'Em espera'");
 				//OBS:Verificar se o status do candidado ainda nao selecionado e 'Em espera'
-				ps.setString(1,esp);
+				ps.setString(1,nome_esp);
 				ResultSet rs =  ps.executeQuery();
 				cpf = rs.getString("cd_cpf");
 

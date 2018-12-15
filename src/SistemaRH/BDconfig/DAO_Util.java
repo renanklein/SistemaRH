@@ -52,9 +52,9 @@ public class DAO_Util {
 			a.iniciaBd();
 			Connection c = a.getConexao();
 			//Fazendo a consulta no BD com o id da vaga passado como parametro
-			PreparedStatement ps = (PreparedStatement) c.prepareStatement("SELECT * FROM concurso_vaga_historico as vh "
-					+ "JOIN concurso_especialidade as ce ON ce.id_concurso_especialidade = vt.id_concurso_especialidade"
-					+ "WHERE ce.ds_especialidade = ? and vt.id_nu_vaga = ?");
+			PreparedStatement ps = (PreparedStatement) c.prepareStatement("SELECT * FROM concurso_vaga as vh "
+					+ "JOIN concurso_especialidade as ce ON ce.id_concurso_especialidade = vh.id_concurso_especialidade"
+					+ "WHERE ce.ds_especialidade = ? and vh.nu_vaga = ?");
 			ps.setString(1,espec.getNome_espec());
 			ps.setInt(2, id_vaga);
 			ResultSet rs = ps.executeQuery();
@@ -91,8 +91,8 @@ public class DAO_Util {
 			//Alterando o status do candidato nas tabelas concurso_candidato_situacao_tipo 
 			//Pegando a atual situacao do candidato
 			PreparedStatement ps = (PreparedStatement) c.prepareStatement("SELECT ct.ds_situacao FROM concurso_candidato_situacao_tipo as ct"
-					+ "JOIN concurso_candidato_historico as ch ON ch.id_situacao_nova = ct.id_candidato_situacao"
-					+ "WHERE ch.cd_cpf = ?");
+					+ "WHERE ch.cd_cpf = ?"
+					+ "JOIN concurso_candidato_historico as ch ON ch.id_situacao_nova = ct.id_candidato_situacao");
 			ps.setString(1, cpf);
 			ResultSet rs = ps.executeQuery();
 			String status_antigo = rs.getString("ds_situacao");
