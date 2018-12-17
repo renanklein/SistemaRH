@@ -50,20 +50,90 @@
     <url-pattern>/CriaVagaServlet</url-pattern>
   </servlet-mapping>
   <servlet>
-  <servlet-name>Jersey REST Service</servlet-name>
-  	<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
-  	<init-param>
-  		<param-name>jersey.config.server.provider.packages</param-name>
-  		<param-value>SistemaRH.rest</param-value>
-  	</init-param>
-  	<init-param>
-  		<param-name>com.sum.jersey.api.json.POJOMappingFeature</param-name>
-  		<param-value>true</param-value>
-  	</init-param>
-  	<load-on-startup>1</load-on-startup>
+    <servlet-name>Jersey REST Service</servlet-name>
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <param-name>jersey.config.server.provider.packages</param-name>
+      <param-value>SistemaRH.rest</param-value>
+    </init-param>
+    <init-param>
+      <param-name>com.sum.jersey.api.json.POJOMappingFeature</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>Jersey REST Service</servlet-name>
-  	<url-pattern>/rest/*</url-pattern>
+    <servlet-name>Jersey REST Service</servlet-name>
+    <url-pattern>/rest/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManutencaoCandidatoServlet</display-name>
+    <servlet-name>ManutencaoCandidatoServlet</servlet-name>
+    <servlet-class>SistemaRH.servlet.ManutencaoCandidatoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManutencaoCandidatoServlet</servlet-name>
+    <url-pattern>/ManutencaoCandidatoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManutencaoCandidatoPagRespostas</display-name>
+    <servlet-name>ManutencaoCandidatoPagRespostas</servlet-name>
+    <servlet-class>SistemaRH.servlet.ManutencaoCandidatoPagRespostas</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManutencaoCandidatoPagRespostas</servlet-name>
+    <url-pattern>/ManutencaoCandidatoPagRespostas</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManutencaoCandidatoRespServlet</display-name>
+    <servlet-name>ManutencaoCandidatoRespServlet</servlet-name>
+    <servlet-class>SistemaRH.servlet.ManutencaoCandidatoRespServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManutencaoCandidatoRespServlet</servlet-name>
+    <url-pattern>/ManutencaoCandidatoRespServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>mfuncionarioServlet</display-name>
+    <servlet-name>mfuncionarioServlet</servlet-name>
+    <servlet-class>SistemaRH.servlet.mfuncionarioServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>mfuncionarioServlet</servlet-name>
+    <url-pattern>/mfuncionarioServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>mfuncionarioexoServlet</display-name>
+    <servlet-name>mfuncionarioexoServlet</servlet-name>
+    <servlet-class>SistemaRH.servlet.mfuncionarioexoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>mfuncionarioexoServlet</servlet-name>
+    <url-pattern>/mfuncionarioexoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CandidatoSelecionadoServlet</display-name>
+    <servlet-name>CandidatoSelecionadoServlet</servlet-name>
+    <servlet-class>SistemaRH.servlet.CandidatoSelecionadoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CandidatoSelecionadoServlet</servlet-name>
+    <url-pattern>/CandidatoSelecionadoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CandidatoEfetivadoServlet</display-name>
+    <servlet-name>CandidatoEfetivadoServlet</servlet-name>
+    <servlet-class>SistemaRH.servlet.CandidatoEfetivadoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CandidatoEfetivadoServlet</servlet-name>
+    <url-pattern>/CandidatoEfetivadoServlet</url-pattern>
   </servlet-mapping>
 </web-app>

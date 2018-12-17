@@ -5,11 +5,12 @@ import java.sql.DriverManager;
 import com.mysql.jdbc.Connection;
 
 public class ConexaoBD {
+
 	private Connection con;
 	
 	public void iniciaBd(){
 		try{
-			String database = "jdbc:mysql://127.0.0.1:3307/test";
+			String database = "jdbc:mysql://127.0.0.1:3307/rh";
 			String usuario = "root";
 			String senha = "usbw";
 			Class.forName("com.mysql.jdbc.Driver");
@@ -31,5 +32,6 @@ public class ConexaoBD {
 	public Connection getConexao(){
 		return con;
 	}
+
 
 }

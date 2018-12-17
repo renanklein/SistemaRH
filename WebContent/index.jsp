@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.*" %>
+<%@ page import="SistemaRH.model.Vaga" %>
+<%@ page import="SistemaRH.BDconfig.DAO_Dash" %>
 <!doctype html>
 <html lang="en">
   <head>
@@ -41,19 +44,19 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="pages/mconcursos.jsp">
                   <span data-feather="layers"></span>
                   Manutenção de Concursos
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="pages/mfuncionario.jsp">
                   <span data-feather="users"></span>
                   Manutenção de Funcionários
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="pages/ManutencaoCandidato.jsp">
                   <span data-feather="users"></span>
                   Manutenção de Candidatos
                 </a>
@@ -126,33 +129,31 @@
 			  </div>
 			  
 			  <!--<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>-->
-			  
+			  <%
+			  	LinkedList<Vaga> vagas = DAO_Dash.ListarVagasAbertas();
+			  %>
 			  <h2>Vagas em Aberto</h2>
 			  <div class="table-responsive">
 				<table class="table table-striped table-sm">
 				  <thead>
 					<tr>
-					  <th>Id da Vaga</th>
-					  <th>Unidade</th>
-					  <th>Setor</th>
+					  <th>Id Vaga</th>
+					  <th>Id Concurso</th>
+					  <th>Processo</th>
 					  <th>Especialidade</th>
-					  <th>Concurso</th>
+					  <th>Situação</th>
 					</tr>
 				  </thead>
 				  <tbody>
-					<tr>
-					  <td>37</td>
-					  <td>Maracanã</td>
-					  <td>Informática</td>
-					  <td>Técnico</td>
-					  <td>123456</td>
-					</tr>
-					<tr>
-					  <td>120</td>
-					  <td>Maracanã</td>
-					  <td>Faculdade de Medicina</td>
-					  <td>Professor</td>
-					  <td>123456</td>
+				  	<tr>
+				  		<%for(Vaga aux: vagas){ %>
+				  	
+					  <td><%=aux.getNum_vaga() %></td>
+					  <td><%=aux.getId_concurso() %></td>
+					  <td><%=aux.getProcesso() %></td>
+					  <td><%=aux.getEspecialidade() %></td>
+					  <td><%=aux.getStatus() %></td>
+						<%} %>
 					</tr>
 				  </tbody>
 				</table>
@@ -178,112 +179,7 @@
 					  <td>Convocado</td>
 					  <td>123456</td>
 					</tr>
-					<tr>
-					  <td>MARIA DA SILVA</td>
-					  <td>123.456.789.12</td>
-					  <td>120</td>
-					  <td>Convocado</td>
-					  <td>123456</td>
-					</tr>
-					<!--
-					<tr>
-					  <td>1,003</td>
-					  <td>Integer</td>
-					  <td>nec</td>
-					  <td>odio</td>
-					  <td>Praesent</td>
-					</tr>
-					<tr>
-					  <td>1,003</td>
-					  <td>libero</td>
-					  <td>Sed</td>
-					  <td>cursus</td>
-					  <td>ante</td>
-					</tr>
-					<tr>
-					  <td>1,004</td>
-					  <td>dapibus</td>
-					  <td>diam</td>
-					  <td>Sed</td>
-					  <td>nisi</td>
-					</tr>
-					<tr>
-					  <td>1,005</td>
-					  <td>Nulla</td>
-					  <td>quis</td>
-					  <td>sem</td>
-					  <td>at</td>
-					</tr>
-					<tr>
-					  <td>1,006</td>
-					  <td>nibh</td>
-					  <td>elementum</td>
-					  <td>imperdiet</td>
-					  <td>Duis</td>
-					</tr>
-					<tr>
-					  <td>1,007</td>
-					  <td>sagittis</td>
-					  <td>ipsum</td>
-					  <td>Praesent</td>
-					  <td>mauris</td>
-					</tr>
-					<tr>
-					  <td>1,008</td>
-					  <td>Fusce</td>
-					  <td>nec</td>
-					  <td>tellus</td>
-					  <td>sed</td>
-					</tr>
-					<tr>
-					  <td>1,009</td>
-					  <td>augue</td>
-					  <td>semper</td>
-					  <td>porta</td>
-					  <td>Mauris</td>
-					</tr>
-					<tr>
-					  <td>1,010</td>
-					  <td>massa</td>
-					  <td>Vestibulum</td>
-					  <td>lacinia</td>
-					  <td>arcu</td>
-					</tr>
-					<tr>
-					  <td>1,011</td>
-					  <td>eget</td>
-					  <td>nulla</td>
-					  <td>Class</td>
-					  <td>aptent</td>
-					</tr>
-					<tr>
-					  <td>1,012</td>
-					  <td>taciti</td>
-					  <td>sociosqu</td>
-					  <td>ad</td>
-					  <td>litora</td>
-					</tr>
-					<tr>
-					  <td>1,013</td>
-					  <td>torquent</td>
-					  <td>per</td>
-					  <td>conubia</td>
-					  <td>nostra</td>
-					</tr>
-					<tr>
-					  <td>1,014</td>
-					  <td>per</td>
-					  <td>inceptos</td>
-					  <td>himenaeos</td>
-					  <td>Curabitur</td>
-					</tr>
-					<tr>
-					  <td>1,015</td>
-					  <td>sodales</td>
-					  <td>ligula</td>
-					  <td>in</td>
-					  <td>libero</td>
-					</tr>-->
+					
 				  </tbody>
 				</table>
 			  </div>
