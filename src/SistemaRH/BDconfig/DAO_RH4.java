@@ -30,7 +30,7 @@ public class DAO_RH4 {
 				nome = rs.getString("nm_nome_completo");
 				//Status..
 				ps = (PreparedStatement) c.prepareStatement("SELECT ct.ds_situacao FROM concurso_candidato_situacao_tipo as ct,concurso_candidato_historico as cc"
-						+ "WHERE cc.cd_cpf = ? AND cc.id_situacao_nova = ct.id_candidato_situacao_tipo;");
+						+ "WHERE cc.cd_cpf = ? AND cc.id_situacao_nova = ct.id_candidato_situacao;");
 				ps.setString(1,cpf);
 				rs = ps.executeQuery();
 				status = rs.getString("ds_situacao");

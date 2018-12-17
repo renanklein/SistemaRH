@@ -41,19 +41,19 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="mconcursos.jsp">
+                <a class="nav-link" href="pages/mconcursos.jsp">
                   <span data-feather="layers"></span>
                   Manutenção de Concursos
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="mfuncionario.jsp">
+                <a class="nav-link" href="pages/mfuncionario.jsp">
                   <span data-feather="users"></span>
                   Manutenção de Funcionários
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="ManutencaoCandidato.jsp">
+                <a class="nav-link" href="pages/ManutencaoCandidato.jsp">
                   <span data-feather="users"></span>
                   Manutenção de Candidatos
                 </a>

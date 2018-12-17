@@ -88,7 +88,7 @@
 					<div class="form-group">
 						<div class="form-group col-md-6">
 							<label for="inputEmail4">Informar CPF</label>
-							<input type="text" class="form-control" value="" id="CpfCandidato" name="CpfCandidato" placeholder="CPF">
+							<input type="text" class="form-control" id="CpfCandidato" name="CpfCandidato" placeholder="CPF">
 						</div>
 						<span>
 							<input type="submit" class="btn btn-primary" id="enviar" name="enviar" value="Enviar" style="margin:15;"/>
