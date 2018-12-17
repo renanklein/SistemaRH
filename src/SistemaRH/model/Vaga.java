@@ -2,29 +2,12 @@ package SistemaRH.model;
 
 public class Vaga {
 	private int num_vaga;
-	private int id_concurso;
 	private String status_vaga;
 	private String num_processo_conc;
 	private Especialidade vaga_espec;
 	private Historico_Vaga hist;
 	private String especialidade;
 	
-	
-	
-	public Vaga(int id_concurso, int num_vaga, String status_vaga, String num_processo_conc, String especialidade) {
-		super();
-		this.num_vaga = num_vaga;
-		this.id_concurso = id_concurso;
-		this.status_vaga = status_vaga;
-		this.num_processo_conc = num_processo_conc;
-		this.especialidade = especialidade;
-	}
-	public int getId_concurso() {
-		return id_concurso;
-	}
-	public String getEspecialidade() {
-		return especialidade;
-	}
 	public String getStatus() {
 		return this.status_vaga;
 	}

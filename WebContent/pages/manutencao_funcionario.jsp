@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="img/favicon.ico">
 
-    <title>Manutenção de Funcionários</title>
+    <title>Manutenï¿½ï¿½o de Funcionï¿½rios</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -43,31 +43,31 @@
               <li class="nav-item">
                 <a class="nav-link" href="mconcurso.jsp">
                   <span data-feather="layers"></span>
-                  Manutenção de Concursos
+                  Manutenï¿½ï¿½o de Concursos
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="mfuncionario.jsp">
                   <span data-feather="users"></span>
-                  Manutenção de Funcionários
+                  Manutenï¿½ï¿½o de Funcionï¿½rios
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="ManutencaoCandidato.jsp">
                   <span data-feather="users"></span>
-                  Manutenção de Candidatos
+                  Manutenï¿½ï¿½o de Candidatos
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
                   <span data-feather="users"></span>
-                  Manutenção de Usuários
+                  Manutenï¿½ï¿½o de Usuï¿½rios
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
                   <span data-feather="bar-chart-2"></span>
-                  Relatórios
+                  Relatï¿½rios
                 </a>
               </li>
             </ul>
@@ -142,14 +142,14 @@
 				  <tbody>
 					<tr>
 					  <td>37</td>
-					  <td>Maracanã</td>
-					  <td>Informática</td>
-					  <td>Técnico</td>
+					  <td>Maracanï¿½</td>
+					  <td>Informï¿½tica</td>
+					  <td>Tï¿½cnico</td>
 					  <td>123456</td>
 					</tr>
 					<tr>
 					  <td>120</td>
-					  <td>Maracanã</td>
+					  <td>Maracanï¿½</td>
 					  <td>Faculdade de Medicina</td>
 					  <td>Professor</td>
 					  <td>123456</td>
@@ -172,7 +172,7 @@
 				  </thead>
 				  <tbody>
 					<tr>
-					  <td>JOSÉ DA SILVA</td>
+					  <td>JOSï¿½ DA SILVA</td>
 					  <td>987.654.321.98</td>
 					  <td>37</td>
 					  <td>Convocado</td>
