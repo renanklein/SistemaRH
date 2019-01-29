@@ -2,7 +2,6 @@ package br.uerj.rh.servlet;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,22 +33,28 @@ public class mfuncionarioServlet extends HttpServlet {
 		//Obtendo as informacoes digitadas pelo usuario
 		String matricula = request.getParameter("matricula");
 		String operacao = request.getParameter("opcoes");
+		String pagina = "pages/mfuncionarioexo.jsp";
 		//Consultando sua matricula a partir dos dados fornecidos
 		Funcionario func = DAO_RH1.consultaFunc(matricula);
-		String status;
-		if(func.isStatus()) {
-			status = "Ativo";
-		}else status = "Inativo";
 		HttpSession session = request.getSession();
+		if(func == null || !func.isStatus()) {
+			
+			if(func == null) {
+				session.setAttribute("menssagem", "Funcionario não encontrado");
+			}else {
+				session.setAttribute("menssagem", "Esse funcionario já foi exonerado");
+			}
+			pagina = "pages/errorPages/exonerarError.jsp";
+		}
 		session.setAttribute("Funcionario", func);
 		//Realizando as devidas operacoes de acordo com a opcao selecionada pelo usuario
-		if(operacao.equals("exonerado")) {
-			session.setAttribute("status", status);
-			response.sendRedirect("mfuncionarioexo.jsp");
+		if(operacao.equals("exonerar")) {
+			session.setAttribute("Funcionario",func);
+			response.sendRedirect(pagina);
 			//Passando o objeto funcionario para o servlet da pagina de resposta:
-			request.setAttribute("Func", func);
-			RequestDispatcher req = request.getRequestDispatcher("mfuncionarioexoServlet");
-			req.forward(request, response);
+			//request.setAttribute("Func", func);
+			//RequestDispatcher req = request.getRequestDispatcher("mfuncionarioexoServlet");
+			//req.forward(request, response);
 		}else if(operacao.equals("alterar")) {
 			response.sendRedirect("");
 		}

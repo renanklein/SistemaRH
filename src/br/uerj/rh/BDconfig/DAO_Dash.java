@@ -47,7 +47,7 @@ public class DAO_Dash {
 		}
 	}
 	
-	//Lista candidatod em processo de convocação
+	//Lista candidatod em processo de convocaÃ§Ã£o
 	public static synchronized LinkedList<Candidato> ListarCandidatosConvocados() {
 		try {
 			LinkedList<Candidato> Lcand = new LinkedList<Candidato>();
@@ -56,17 +56,20 @@ public class DAO_Dash {
 			a.iniciaBd();
 			Connection c = a.getConexao();
 			PreparedStatement ps = (PreparedStatement) c.prepareStatement(
-					"SELECT p.cd_cpf AS cpf, nm_nome_completo AS nome, ds_Unidade AS unidade, ds_situacao AS situacao, cd_processo AS processo, ds_perfil AS perfil, ds_especialidade AS especialidade, ds_regiao AS regiao\r\n" + 
+					"SELECT c.cd_chave_candidato AS idc, c.id_situacao, c.ds_Unidade AS unidade, c.ds_lotacao AS lotacao,\r\n" + 
+					"c.ds_localizacao AS localiz, c.nm_nome_completo AS nome, c.id_Matricula AS matricula,\r\n" + 
+					"c.dt_portaria_Nomeacao AS datap,c.ds_codigo_portaria AS portaria, c.id_VAGA AS vaga,\r\n" + 
+					"e.cd_processo AS processo, e.ds_perfil AS perfil, e.ds_especialidade AS especialidade, e.ds_regiao AS regiao,\r\n" + 
+					"s.ds_situacao AS situacao\r\n" + 
 					"FROM concurso_candidato AS c\r\n" + 
-					"JOIN pessoa AS p ON c.cd_cpf = p.cd_cpf\r\n" + 
-					"JOIN concurso_candidato_situacao_tipo AS s ON c.id_situacao = s.id_candidato_situacao\r\n" + 
 					"JOIN concurso_especialidade AS e ON e.id_concurso_especialidade = c.id_concurso_especialidade\r\n" + 
-					"WHERE c.id_situacao =3\r\n" + 
-					"OR c.id_situacao =2");
+					"JOIN concurso_candidato_situacao_tipo AS s ON c.id_situacao = s.id_candidato_situacao\r\n" + 
+					"WHERE  c.id_situacao IN (2, 3, 8)");
+
 			ResultSet res = (ResultSet) ps.executeQuery();
 			while (res.next()) {
 				Lcand.add(new Candidato(
-						res.getString("cpf"),
+						res.getString("idc"),
 						res.getString("nome"),
 						res.getString("situacao"),
 						res.getString("unidade"),

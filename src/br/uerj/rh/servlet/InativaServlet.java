@@ -37,9 +37,10 @@ public class InativaServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mat = request.getParameter("matricula");
-		boolean isExonerado = DAO_RH1.exoneraFunc(mat);
+		Funcionario func = DAO_RH1.consultaFunc(mat);
+		int id_vaga = DAO_RH1.exoneraFunc(func);
 		HttpSession session =  request.getSession();
-		//session.setAttribute("func", func);
+		session.setAttribute("id_vaga", id_vaga);
 		response.sendRedirect("res.jsp");
 
 	}

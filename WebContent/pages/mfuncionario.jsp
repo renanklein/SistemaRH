@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import= "br.uerj.rh.model.Usuario" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +21,17 @@
 	<link href="css/dashboard.css" rel="stylesheet">
 </head>
 <body>
+<%
+  		Usuario user = (Usuario) session.getAttribute("usuario");
+    	if(user == null){
+    		String mensagem = (String) session.getAttribute("mensagem");
+    		if(mensagem == null){
+    			mensagem = "É NECESSÁRIO SE LOGAR PARA ACESSAR O SISTEMA.";
+    			session.setAttribute("mensagem", mensagem);
+    		}
+    		response.sendRedirect("login.jsp");
+    	}
+  	%>
 	<nav class="navbar navbar-light fixed-top bg-light flex-md-nowrap p-0 shadow">
 		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Sistema RH UERJ</a>
 		<img src="img/logo_uerj_cor.png" alt="" width="40" >
@@ -134,7 +146,7 @@
 			<table class="table table-striped table-sm">
 				<div class="divform">
 					<h5>Entre com os dados do Funciónário logo abaixo:</h5><br><br>
-					<form class="formlugar" id="mfuncionario" method="post" action="mfuncionarioServlet" >
+					<form class="formlugar" id="mfuncionario" method="get" action="../mfuncionarioServlet" >
 						
 						<label>
 							<span><p>Matrícula do Funcionário:</p></span>

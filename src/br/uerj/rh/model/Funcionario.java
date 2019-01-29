@@ -12,14 +12,40 @@ public class Funcionario extends Pessoa{
 	private Calendar data_portaria;
 	private boolean status;
 	private String processo;
+	private String lotacao;
+	private String localizacao;
+	private int id_especialidade;
+	private String nm_especialidade;
+	private String perfil;
 	
-	public Funcionario(String mat, String cpf, String nome, String processo, boolean status, int vaga) {
+	public String getLotacao() {
+		return lotacao;
+	}
+
+	public void setLotacao(String lotacao) {
+		this.lotacao = lotacao;
+	}
+
+	public String getLocalizacao() {
+		return localizacao;
+	}
+
+	public void setLocalizacao(String localizacao) {
+		this.localizacao = localizacao;
+	}
+
+	public void setIdVaga(int idVaga) {
+		this.idVaga = idVaga;
+	}
+
+	public Funcionario(String mat, String chave, String nome, String processo, boolean status, int vaga,int id) {
+		super.setChave(chave);
 		super.setNome(nome);
-		super.setCPF(cpf);
 		this.matricula = mat;
 		this.status = status;
 		this.idVaga = vaga;
 		this.processo = processo;
+		this.id_especialidade = id;
 	}
 
 	public String getMatricula() {
@@ -96,6 +122,30 @@ public class Funcionario extends Pessoa{
 
 	public void setProcesso(String processo) {
 		this.processo = processo;
+	}
+
+	public int getId_especialidade() {
+		return id_especialidade;
+	}
+
+	public void setId_especialidade(int id_especialidade) {
+		this.id_especialidade = id_especialidade;
+	}
+
+	public String getNm_especialidade() {
+		return nm_especialidade;
+	}
+
+	public void setNm_especialidade(String nm_especialidade) {
+		this.nm_especialidade = nm_especialidade;
+	}
+
+	public String getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
 	}
 
 

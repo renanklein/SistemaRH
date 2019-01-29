@@ -5,15 +5,23 @@ import java.util.Stack;
 
 public class Historico_Candidato {
 	private Especialidade esp;
-	private String cpf;
+	private String chave;
 	private Stack<String> hist_status;
 	private Calendar mudanca_situacao;
 	private boolean ap_documentacao;
 	
 	public Historico_Candidato(Candidato c) {
-		this.cpf = c.getCPF();
+		this.chave = c.getChave();
 		this.esp = c.getCad_esp();
 		this.hist_status.push(c.getStatus());
+	}
+
+	public String getChave() {
+		return chave;
+	}
+
+	public void setChave(String chave) {
+		this.chave = chave;
 	}
 
 	public Especialidade getEsp() {
@@ -24,13 +32,6 @@ public class Historico_Candidato {
 		this.esp = esp;
 	}
 
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
 
 	public Stack<String> getHist_status() {
 		return hist_status;

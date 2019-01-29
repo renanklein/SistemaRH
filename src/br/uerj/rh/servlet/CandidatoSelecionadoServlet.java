@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.uerj.rh.BDconfig.DAO_RH3;
+import br.uerj.rh.BDconfig.DAO_Util;
 import br.uerj.rh.model.Candidato;
 
 /**
@@ -38,8 +38,8 @@ public class CandidatoSelecionadoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Candidato selecionado = (Candidato) request.getAttribute("Selecionado");
-		int numero_vaga = Integer.parseInt(request.getParameter("IdVaga"));
-		DAO_RH3.selecionaCandidato(selecionado.getCPF(),numero_vaga);
+		//int numero_vaga = Integer.parseInt(request.getParameter("IdVaga"));
+		DAO_Util.setStatusCandidato(2,selecionado);
 		response.sendRedirect("DadosCand.jsp");
 	}
 

@@ -9,11 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import br.uerj.rh.BDconfig.DAO_RH3;
-import br.uerj.rh.BDconfig.DAO_RH4;
 import br.uerj.rh.BDconfig.DAO_Util;
 import br.uerj.rh.model.Candidato;
-import br.uerj.rh.model.Funcionario;
 
 /**
  * Servlet implementation class ManutencaoCandidatoRespServlet
@@ -49,7 +46,7 @@ public class ManutencaoCandidatoRespServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("Candidato",c);
 		if(status.equals("eliminado")) {
-			DAO_Util.setStatusCandidato("Eliminado",c.getCPF());
+			DAO_Util.setStatusCandidato(7,c);
 			response.sendRedirect("pages/respPages/DadosCand.jsp");
 		}else if(status.equals("efetivado")) {
 			//Repassando a responsabilidade para executar a ação para um outro servlet
@@ -64,8 +61,8 @@ public class ManutencaoCandidatoRespServlet extends HttpServlet {
 			RequestDispatcher req = request.getRequestDispatcher("CandidatoSelecionadoServlet");
 			req.forward(request, response);
 			response.sendRedirect("pages/respPages/DadosCand.jsp");
-		}else if(status.equals("emespera")) {
-			DAO_Util.setStatusCandidato("Em espera",c.getCPF());
+		}else if(status.equals("fimdefila")) {
+			DAO_Util.setStatusCandidato(5,c);
 			response.sendRedirect("pages/respPages/DadosCand.jsp");
 		}
 	}

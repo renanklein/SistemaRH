@@ -1,7 +1,7 @@
 package br.uerj.rh.model;
 
 public class Vaga {
-	private int num_vaga;
+	private int id_vaga;
 	private int id_concurso;
 	private String status_vaga;
 	private String num_processo_conc;
@@ -11,15 +11,15 @@ public class Vaga {
 	
 	
 	
-	public Vaga(int id_concurso, int num_vaga, String status_vaga, String num_processo_conc, String especialidade) {
+	public Vaga(int id_concurso, int id_vaga, String status_vaga, String num_processo_conc, String especialidade) {
 		super();
-		this.num_vaga = num_vaga;
+		this.id_vaga = id_vaga;
 		this.id_concurso = id_concurso;
 		this.status_vaga = status_vaga;
 		this.num_processo_conc = num_processo_conc;
 		this.especialidade = especialidade;
 	}
-	public Vaga() {
+	public Vaga () {
 		
 	}
 	public int getId_concurso() {
@@ -53,11 +53,11 @@ public class Vaga {
 	public void setHistorico(Historico_Vaga hist) {
 		this.hist = hist;
 	}
-	public int getNum_vaga() {
-		return num_vaga;
+	public int getId_vaga() {
+		return id_vaga;
 	}
-	public void setNum_vaga(int num_vaga) {
-		this.num_vaga = num_vaga;
+	public void setId_vaga(int id_vaga) {
+		this.id_vaga = id_vaga;
 	}
 	
 	

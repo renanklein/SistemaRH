@@ -1,13 +1,17 @@
 package br.uerj.rh.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import br.uerj.rh.BDconfig.DAO_RH1;
+import br.uerj.rh.BDconfig.DAO_Util;
+import br.uerj.rh.model.Candidato;
 import br.uerj.rh.model.Funcionario;
 
 /**
@@ -15,21 +19,23 @@ import br.uerj.rh.model.Funcionario;
  */
 public class mfuncionarioexoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public mfuncionarioexoServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public mfuncionarioexoServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doPost(request,response);
+		doPost(request, response);
 	}
 
 	/**
@@ -38,16 +44,48 @@ public class mfuncionarioexoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Obtendo as informacoes digitadas pelo usuario:
 		String radioValue = request.getParameter("opcao");
-		String textAreaValue = request.getParameter("contatocomentario");
-		//Obtendo o objeto do funcionario do servlet mfuncionario:
-		Funcionario f = (Funcionario) request.getAttribute("Func");
+		//String textAreaValue = request.getParameter("contatocomentario");
+		//Obtendo o objeto do funcionario do jsp
+		HttpSession session = request.getSession();
+		Funcionario f= (Funcionario) session.getAttribute("func");
 		//Realizando operacoes de acordo com a opcao marcada pelo usuario:
+		System.out.println("1");
 		if(radioValue.equals("sim")) {
-			boolean result = DAO_RH1.exoneraFunc(f.getMatricula());
-			//Rotina para redirecionar o usuario caso a operacao de exoneracao foi um sucesso ou nao:
-			if(result) response.sendRedirect("");
-			else response.sendRedirect("deu ruim");
-		}else if(radioValue.equals("nao")) response.sendRedirect("../index.jsp");
+			System.out.println("3");
+			int id_vaga = DAO_RH1.exoneraFunc(f);
+			if(id_vaga < 0 ) {
+				session.setAttribute("menssagem","Funcionario não encontrado");
+				response.sendRedirect("pages/errorPages/exonerarError.jsp");
+			}
+			else {
+				if(DAO_Util.isConcursoValido(f.getProcesso())) {
+					ArrayList<Candidato> lcands = DAO_Util.ProximoCand(f);				
+					if(lcands.size() == 0) {
+						session.setAttribute("menssagem", "Não há candidatos disponíveis para essa vaga");
+						response.sendRedirect("pages/errorPages/exonerarError.jsp");
+					}else if(lcands.size() > 1) {
+						session.setAttribute("candidatos", lcands);
+						session.setAttribute("menssagem", "Ocorreu um empate");
+						DAO_Util.setStatusVaga(3, id_vaga, f.getChave());
+						//OBS: Verificar se a vaga ainda estará vinculada ao func, mesmo após a exoneracao
+						response.sendRedirect("pages/respPages/ProximoCand.jsp");//Página para mostrar os candidatos que estão aptos a ocupar a v
+					}else {
+						session.setAttribute("candidatos", lcands);
+						session.setAttribute("menssagem", "Segue as informações do candidato apto a ser convocado para a vaga");
+						response.sendRedirect("pages/respPages/ProximoCand.jsp");
+					}
+				}
+				else {
+					System.out.println("2");
+					session.setAttribute("menssagem", "Concurso expirado");
+					response.sendRedirect("pages/errorPages/exonerarError.jsp");
+				}
+			}
+			
+	}else if(radioValue.equals("nao")) {
+		System.out.println("Testando ...");
+		response.sendRedirect("index.jsp");
 	}
+  }
 
 }

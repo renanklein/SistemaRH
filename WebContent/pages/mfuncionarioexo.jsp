@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="br.uerj.rh.model.Funcionario" %>
+<%@page import="br.uerj.rh.model.Usuario" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +23,17 @@
 	
 </head>
 <body>
+	<%
+  		Usuario user = (Usuario) session.getAttribute("usuario");
+    	if(user == null){
+    		String mensagem = (String) session.getAttribute("mensagem");
+    		if(mensagem == null){
+    			mensagem = "É NECESSÁRIO SE LOGAR PARA ACESSAR O SISTEMA.";
+    			session.setAttribute("mensagem", mensagem);
+    		}
+    		response.sendRedirect("login.jsp");
+    	}
+  	%>
 	<nav class="navbar navbar-light fixed-top bg-light flex-md-nowrap p-0 shadow">
 		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Sistema RH UERJ</a>
 		<img src="img/logo_uerj_cor.png" alt="" width="40" >
@@ -135,15 +147,22 @@
 				<thead>
 					<tr>
 						<th>Nome</th>
-						<th>CPF</th>
-						<th>ID da Vaga</th>
-						<th>Status</th>
-						<th>Concurso</th>
+						<th>Processo</th>
+						<th>Especialidade</th>
+						<th>Perfil</th>
+						<th>Unidade</th>
+						<th>Lotacao</th>
+						<th>Localizacao</th>
 					</tr>
 				</thead>
 				<tbody>
-				<%Funcionario exo = (Funcionario) session.getAttribute("Funcionario"); %>
-				<%String status = (String) session.getAttribute("status"); %>
+				<%Funcionario exo = (Funcionario) session.getAttribute("Funcionario");
+				//System.out.println(exo.getNome().equals(null));
+				//System.out.println(exo.getProcesso().equals(null));
+				//System.out.println(exo.getUnidade().equals(null));
+				//System.out.println(exo.getEsp_func().getNome_espec().equals(null));
+				//System.out.println(exo.getEsp_func().getRegiao().equals(null));
+				%>
 					<!--<tr>
 						<td>JOSÉ DA SILVA</td>
 						<td>987.654.321.98</td>
@@ -153,10 +172,12 @@
 					</tr> -->
 					<tr>
 						<td><%=exo.getNome() %></td>
-						<td><%=exo.getCPF() %></td>
-						<td><%=exo.getIdVaga() %></td>
-						<td><%=status %></td>
-						<td><%=exo.getCod_concurso() %></td>
+						<td><%=exo.getProcesso() %></td>
+						<td><%=exo.getNm_especialidade() %></td>
+						<td><%=exo.getPerfil() %></td>
+						<td><%=exo.getUnidade() %></td>
+						<td><%=exo.getLotacao() %></td>
+						<td><%=exo.getLocalizacao() %></td>
 					</tr>
 					<!--
 					<tr>
@@ -268,7 +289,7 @@
 				<div class="divform">
 					
 					<h5>Confirmar exoneração do Funcionário?</h5><br>
-					<form class="formlugar" method="post" action="mfuncionarioexoServlet" target="_blank">
+					<form class="formlugar" method="post" action="../mfuncionarioexoServlet">
 						
 						<label>
 							<input type="radio" id="opcao" name="opcao" value="sim"> Sim
@@ -312,7 +333,7 @@
 							    <input type="reset" class="btn btn-danger" value="Apagar" style="margin:15;"/>
 							</span>
 						</label>						
-
+						<%session.setAttribute("func",exo); %>
 					</form>
 					
 				

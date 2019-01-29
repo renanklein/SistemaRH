@@ -161,7 +161,7 @@
 				  	
 				  <%for(Vaga aux: vagas){ %>
 				  	<tr>
-					  <td><%=aux.getNum_vaga() %></td>
+					  <td><%=aux.getId_vaga() %></td>
 					  <td><%=aux.getId_concurso() %></td>
 					  <td><%=aux.getProcesso() %></td>
 					  <td><%=aux.getEspecialidade() %></td>
@@ -192,8 +192,8 @@
 				  <%if (cand!=null){ %>
 				  <%for(Candidato aux2: cand){ %>
 					<tr>
-					  <td><a href="pages/ManutencaoCandidato.jsp?cpf=<%=aux2.getCPF()%>&nome=<%=aux2.getNome()%>"><%=aux2.getNome() %></a></td>
-					  <!-- <td><%=aux2.getCPF() %></td> -->
+					  <td><a href="pages/ManutencaoCandidato.jsp?cpf=<%=aux2.getChave()%>&nome=<%=aux2.getNome()%>"><%=aux2.getNome() %></a></td>
+					  <!-- <td><%=aux2.getChave() %></td> -->
 					  <td><%=aux2.getProcesso() %></td>
 					  <td><%=aux2.getUnidade() %></td>
 					  <td><%=aux2.getPerfil() %></td>

@@ -4,18 +4,21 @@ package br.uerj.rh.model;
 		private String num_inscricao;
 		private Especialidade cad_esp;
 		private int classificacao;
+		private int id_vaga;
 		private String status;
 		private String unidade, processo, perfil, especialidade, regiao;
+		private int id_espec;
+		private int id_situacao;
 		
-		public Candidato(String cpf,Especialidade esp,String s,String nome) {
-			super.setCPF(cpf);
+		public Candidato(String chave,Especialidade esp,String s,String nome) {
+			super.setChave(chave);
 			super.setNome(nome);
 			this.cad_esp = esp;
 			this.status = s;
 		}
 				
-		public Candidato(String cpf, String nome,String status, String unidade, String processo, String perfil, String especialidade,String regiao) {
-			super.setCPF(cpf);
+		public Candidato(String chave, String nome,String status, String unidade, String processo, String perfil, String especialidade,String regiao) {
+			super.setChave(chave);
 			super.setNome(nome);
 			this.status = status;
 			this.unidade = unidade;
@@ -71,6 +74,30 @@ package br.uerj.rh.model;
 
 		public void setStatus(String status) {
 			this.status = status;
+		}
+
+		public int getId_vaga() {
+			return id_vaga;
+		}
+
+		public void setId_vaga(int id_vaga) {
+			this.id_vaga = id_vaga;
+		}
+
+		public int getId_espec() {
+			return id_espec;
+		}
+
+		public void setId_espec(int id_espec) {
+			this.id_espec = id_espec;
+		}
+
+		public int getId_situacao() {
+			return id_situacao;
+		}
+
+		public void setId_situacao(int id_situacao) {
+			this.id_situacao = id_situacao;
 		}
 		
 	}

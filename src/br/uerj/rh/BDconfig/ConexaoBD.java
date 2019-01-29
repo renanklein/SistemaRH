@@ -10,9 +10,9 @@ public class ConexaoBD {
 	
 	public void iniciaBd(){
 		try{
-			String database = "jdbc:mysql://127.0.0.1:3307/rh";
+			String database = "jdbc:mysql://127.0.0.1:3306/rh2";
 			String usuario = "root";
-			String senha = "usbw";
+			String senha = "renan";
 			Class.forName("com.mysql.jdbc.Driver");
 			con = (Connection) DriverManager.getConnection(database, usuario, senha);
 			

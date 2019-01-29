@@ -6,7 +6,7 @@ import java.util.Calendar;
 public abstract class Pessoa {
 	private String nome;
 	private Calendar data_nascimento;
-	private String CPF;
+	private String chave;
 	private String etnia;
 	private boolean PCD;
 	private String cod_concurso;
@@ -27,12 +27,12 @@ public abstract class Pessoa {
 		this.data_nascimento = data_nascimento;
 	}
 
-	public String getCPF() {
-		return CPF;
+	public String getChave() {
+		return chave;
 	}
 
-	public void setCPF(String cPF) {
-		CPF = cPF;
+	public void setChave(String chave) {
+		this.chave = chave;
 	}
 
 	public String getEtnia() {
