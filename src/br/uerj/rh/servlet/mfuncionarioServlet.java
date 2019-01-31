@@ -55,8 +55,6 @@ public class mfuncionarioServlet extends HttpServlet {
 			//request.setAttribute("Func", func);
 			//RequestDispatcher req = request.getRequestDispatcher("mfuncionarioexoServlet");
 			//req.forward(request, response);
-		}else if(operacao.equals("alterar")) {
-			response.sendRedirect("");
 		}
 	}
 

@@ -167,7 +167,6 @@
 								<select class="input" id="opcoes" name="opcoes" required>
                                     <option value="selecione">-- Selecione --</option>
                                     <option value="exonerar">Exonerar Funcionário</option>
-								    <option value="alterar">Alterar dados Cadastrais</option>
                                 </select>
 							</span>
 						</label>	
