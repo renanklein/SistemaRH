@@ -61,7 +61,7 @@ public class mfuncionarioexoServlet extends HttpServlet {
 				if(DAO_Util.isConcursoValido(f.getProcesso())) {
 					ArrayList<Candidato> lcands = DAO_Util.ProximoCand(f);				
 					if(lcands.size() == 0) {
-						session.setAttribute("menssagem", "Não há candidatos disponíveis para essa vaga");
+						session.setAttribute("menssagem", "Funcionário exonerado mas não há candidatos disponíveis");
 						response.sendRedirect("pages/errorPages/exonerarError.jsp");
 					}else if(lcands.size() > 1) {
 						session.setAttribute("candidatos", lcands);
@@ -77,7 +77,7 @@ public class mfuncionarioexoServlet extends HttpServlet {
 				}
 				else {
 					System.out.println("2");
-					session.setAttribute("menssagem", "Concurso expirado");
+					session.setAttribute("menssagem", "Funcionário exnerado mas o concurso expirou");
 					response.sendRedirect("pages/errorPages/exonerarError.jsp");
 				}
 			}

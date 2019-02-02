@@ -12,7 +12,7 @@ public class ConexaoBD {
 		try{
 			String database = "jdbc:mysql://127.0.0.1:3306/rh2";
 			String usuario = "root";
-			String senha = "renan";
+			String senha = "";
 			Class.forName("com.mysql.jdbc.Driver");
 			con = (Connection) DriverManager.getConnection(database, usuario, senha);
 			

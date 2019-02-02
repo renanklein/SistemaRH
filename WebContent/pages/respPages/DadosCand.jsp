@@ -101,7 +101,7 @@
 					</tr> -->
 					<tr>
 						<td><%=confirmacao.getNome() %></td>
-						<td><%=confirmacao.getCPF() %></td>
+						<td><%=confirmacao.getChave() %></td>
 						<td><%=confirmacao.getStatus() %></td>
 						<td><%=confirmacao.getCad_esp().getId_concurso() %></td>
 					</tr>

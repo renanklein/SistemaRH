@@ -105,7 +105,7 @@
 					</tr> -->
 					<tr>
 						<td><%=exibido.getNome() %></td>
-						<td><%=exibido.getCPF() %></td>
+						<td><%=exibido.getChave() %></td>
 						<td><%=exibido.getStatus() %></td>
 						<td><%=exibido.getCad_esp().getId_concurso() %></td>
 					</tr>
