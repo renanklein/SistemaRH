@@ -49,13 +49,13 @@ public class mfuncionarioServlet extends HttpServlet {
 		session.setAttribute("Funcionario", func);
 		//Realizando as devidas operacoes de acordo com a opcao selecionada pelo usuario
 		session.setAttribute("Funcionario",func);
-		if(operacao.equals("alterar")) {
+		if(operacao.equals("alterar") && pagina.equals("")) {
 			pagina = "pages/alteraFunc.jsp";
 			//Passando o objeto funcionario para o servlet da pagina de resposta:
 			//request.setAttribute("Func", func);
 			//RequestDispatcher req = request.getRequestDispatcher("mfuncionarioexoServlet");
 			//req.forward(request, response);
-		} else if(operacao.equals("exonerar")) {
+		} else if(operacao.equals("exonerar") && pagina.equals("")) {
 			pagina = "pages/mfuncionarioexo.jsp";
 		}
 		response.sendRedirect(pagina);

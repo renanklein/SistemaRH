@@ -195,7 +195,7 @@ public class DAO_Util {
 			Connection c = a.getConexao();
 			//Obtendo o nome do candidato a ser chamado
 			System.gc();
-			PreparedStatement pes = (PreparedStatement) c.prepareStatement("SELECT cc.cd_chave_candidato,cc.nm_nome_completo FROM concurso_candidato as cc WHERE \r\n" + 
+			PreparedStatement pes = (PreparedStatement) c.prepareStatement("SELECT cc.cd_chave_candidato,cc.nm_nome_completo,cc.nu_candidato_posicao_empate FROM concurso_candidato as cc WHERE \r\n" + 
 					"	cc.id_concurso_especialidade = ? \r\n" + 
 					"	AND cc.nu_candidato_posicao = (select min(c.nu_candidato_posicao) from concurso_candidato as c where c.id_situacao = 1); ");
 			pes.setInt(1,exonerado.getId_especialidade());
@@ -204,15 +204,19 @@ public class DAO_Util {
 			System.out.println(r.getColumnDisplaySize(1));
 
 			if(res.next()) {
+				int empate = res.getInt("nu_candidato_posicao_empate");
 				lcands.add(DAO_RH4.getCandidato(res.getString("cd_chave_candidato")));
 				String[] splitChave =  lcands.get(0).getChave().split(":");
 				System.out.println("Primeira parte :" + splitChave[0] +" Segunda parte:" +splitChave[1]);
-				if(Integer.parseInt(splitChave[1]) > 0 ) {
+				
+				if(Integer.parseInt(splitChave[1]) > 0  && empate > 0) {
 					//Obtendo os nomes dos candidato que estão empatados(Ultima parte da chave)
-					PreparedStatement ps1 = (PreparedStatement) c.prepareStatement("SELECT cc.nm_nome_completo, cc.cd_chave_candidato FROM concurso_candidato as cc \r\n" + 
-							"WHERE SUBSTRING_INDEX(cc.cd_chave_candidato,':',-1) = ?\r\n" + 
-							"AND SUBSTRING_INDEX(cc.cd_chave_candidato,':',1) != ?"
-							+ "AND id_situacao = 1;");
+					PreparedStatement ps1 = (PreparedStatement) c.prepareStatement("SELECT cc.nm_nome_completo, cc.cd_chave_candidato,cc.nu_candidato_posicao_empate FROM concurso_candidato as cc \r\n" + 
+							"								WHERE SUBSTRING_INDEX(cc.cd_chave_candidato,':',-1) = ?\r\n" + 
+							"								AND SUBSTRING_INDEX(cc.cd_chave_candidato,':',1) != ?\r\n" + 
+							"								AND cc.id_situacao = 1\r\n" + 
+							"								AND cc.nu_candidato_posicao_empate > 0;\r\n" + 
+							"                                ");
 					ps1.setString(1, splitChave[1]);
 					ps1.setString(2, splitChave[0]);
 					
@@ -227,21 +231,25 @@ public class DAO_Util {
 			}
 			else{
 				//Obtendo o nome do candidato a ser chamado
-				PreparedStatement ps2 = (PreparedStatement) c.prepareStatement("  SELECT cc.cd_chave_candidato,cc.nm_nome_completo,cc.nu_candidato_posicao_fim FROM concurso_candidato as cc WHERE \r\n" + 
+				PreparedStatement ps2 = (PreparedStatement) c.prepareStatement("  SELECT cc.cd_chave_candidato,cc.nm_nome_completo,cc.nu_candidato_posicao_fim,cc.nu_candidato_posicao_empate FROM concurso_candidato as cc WHERE \r\n" + 
 						"						    cc.id_concurso_especialidade = ?\r\n" + 
 						"						    AND cc.nu_candidato_posicao = (select min(c.nu_candidato_posicao) from concurso_candidato as c where c.id_situacao = 5);");
 				ps2.setInt(1, exonerado.getId_especialidade());
 				ResultSet res2 = ps2.executeQuery();
 				if(res2.next()) {
+					int empate = res2.getInt("nu_candidato_posicao_empate");
 					lcands.add(DAO_RH4.getCandidato(res2.getString("cd_chave_candidato")));
 					String[] splitChave =  lcands.get(0).getChave().split(":");
-					if(Integer.parseInt(splitChave[1]) > 0 ) {
+					
+					if(Integer.parseInt(splitChave[1]) > 0  && empate > 0) {
 						System.out.println(Integer.parseInt(splitChave[1]));
 						//Obtendo os nomes dos candidato que estão empatados(Ultima parte da chave)
-						PreparedStatement ps1 = (PreparedStatement) c.prepareStatement("SELECT cc.nm_nome_completo, cc.cd_chave_candidato FROM concurso_candidato as cc \r\n" + 
-								"WHERE SUBSTRING_INDEX(cc.cd_chave_candidato,':',-1) = ?\r\n" + 
-								"AND SUBSTRING_INDEX(cc.cd_chave_candidato,':',1) != ?"
-								+ "AND id_situacao = 5;");
+						PreparedStatement ps1 = (PreparedStatement) c.prepareStatement("SELECT cc.nm_nome_completo, cc.cd_chave_candidato,cc.nu_candidato_posicao_empate FROM concurso_candidato as cc \r\n" + 
+								"								WHERE SUBSTRING_INDEX(cc.cd_chave_candidato,':',-1) = ?\r\n" + 
+								"								AND SUBSTRING_INDEX(cc.cd_chave_candidato,':',1) != ?\r\n" + 
+								"								AND cc.id_situacao = 5\r\n" + 
+								"								AND cc.nu_candidato_posicao_empate > 0;\r\n" + 
+								"                                ");						
 						ps1.setString(1, splitChave[1]);
 						ps1.setString(2, splitChave[0]);
 						ResultSet res1 = ps1.executeQuery();
