@@ -265,4 +265,26 @@ public class DAO_Util {
 			return null;
 		}
 	}
+	public static synchronized boolean alteraFunc(Funcionario f,String unidade,String lotacao, String localizacao) {
+		try {
+			ConexaoBD a = new ConexaoBD();
+			a.iniciaBd();
+			Connection c = a.getConexao();
+			//Obtendo o nome do candidato a ser chamado
+			System.gc();
+			PreparedStatement ps = (PreparedStatement) c.prepareStatement("UPDATE concurso_candidato SET ds_Unidade = ?,ds_lotacao = ?,ds_localizacao = ? WHERE id_matricula = ?");
+			ps.setString(1, unidade);
+			ps.setString(2, lotacao);
+			ps.setString(3, localizacao);
+			ps.setString(4, f.getMatricula());
+			
+			ps.executeUpdate();
+			
+			return true;
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return false;
+		}
+		
+	}
 }

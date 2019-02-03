@@ -33,7 +33,7 @@ public class mfuncionarioServlet extends HttpServlet {
 		//Obtendo as informacoes digitadas pelo usuario
 		String matricula = request.getParameter("matricula");
 		String operacao = request.getParameter("opcoes");
-		String pagina = "pages/mfuncionarioexo.jsp";
+		String pagina = "";
 		//Consultando sua matricula a partir dos dados fornecidos
 		Funcionario func = DAO_RH1.consultaFunc(matricula);
 		HttpSession session = request.getSession();
@@ -48,14 +48,17 @@ public class mfuncionarioServlet extends HttpServlet {
 		}
 		session.setAttribute("Funcionario", func);
 		//Realizando as devidas operacoes de acordo com a opcao selecionada pelo usuario
-		if(operacao.equals("exonerar")) {
-			session.setAttribute("Funcionario",func);
-			response.sendRedirect(pagina);
+		session.setAttribute("Funcionario",func);
+		if(operacao.equals("alterar")) {
+			pagina = "pages/alteraFunc.jsp";
 			//Passando o objeto funcionario para o servlet da pagina de resposta:
 			//request.setAttribute("Func", func);
 			//RequestDispatcher req = request.getRequestDispatcher("mfuncionarioexoServlet");
 			//req.forward(request, response);
+		} else if(operacao.equals("exonerar")) {
+			pagina = "pages/mfuncionarioexo.jsp";
 		}
+		response.sendRedirect(pagina);
 	}
 
 	/**

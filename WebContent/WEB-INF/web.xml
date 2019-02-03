@@ -126,4 +126,14 @@
     <servlet-name>EfetivadoServlet</servlet-name>
     <url-pattern>/EfetivadoServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>alterFuncServlet</display-name>
+    <servlet-name>alterFuncServlet</servlet-name>
+    <servlet-class>br.uerj.rh.servlet.alterFuncServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>alterFuncServlet</servlet-name>
+    <url-pattern>/alterFuncServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
