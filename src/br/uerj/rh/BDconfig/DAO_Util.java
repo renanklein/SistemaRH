@@ -119,6 +119,13 @@ public class DAO_Util {
 				ps1.setInt(1, cand.getId_espec());
 				ps1.executeUpdate();
 				ps1.close();
+			} else if(id_situacao == 2) {
+				PreparedStatement ps1 = (PreparedStatement) c.prepareStatement("UPDATE concurso_especialidade "
+						+ "SET nu_vacancia = nu_vacancia +  1 where id_concurso_especialidade = ?");
+				ps1.setInt(1, cand.getId_espec());
+				int teste = ps1.executeUpdate();
+				System.out.println("Opa, mudou");
+				ps1.close();
 			}
 			ps.close();
 			c.close();
@@ -227,7 +234,7 @@ public class DAO_Util {
 					}
 					res1.close();
 					ps1.close();
-				}
+				} 
 			}
 			else{
 				//Obtendo o nome do candidato a ser chamado

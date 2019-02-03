@@ -53,7 +53,7 @@
         <h5><%=msg %></h5>
 		<div class="table-responsive">
 			<table class="table table-striped table-sm">
-				<thead>
+				<!--  <thead>
 					<tr>
 						<th>Nome</th>
 						<th>Processo</th>
@@ -63,7 +63,7 @@
 						<th>Regiao</th>
 						<th>Situação</th>
 					</tr>
-				</thead>
+				</thead>-->
 				<%ArrayList<Candidato> confirmacao = (ArrayList<Candidato>) session.getAttribute("candidatos");%>
 				<%for(Candidato c:confirmacao){ %>
 				<tbody>
@@ -75,7 +75,7 @@
 						<td>123456</td>
 					</tr> -->
 					<tr>
-						<td><a href="../ManutencaoCandidato.jsp?cpf=<%=c.getChave()%>&nome=<%=c.getNome()%>"><%=c.getNome() %></a></td>
+						<td><%=c.getNome() %></td>
 						<td><%=c.getProcesso() %></td>
 						<td><%=c.getUnidade() %></td>
 						<td><%=c.getPerfil() %></td>
@@ -85,7 +85,7 @@
 					</tr>
 				</tbody>
 				<%} %>
-				<%session.setAttribute("candidato",confirmacao); %>
+				<% session.setAttribute("candidato",confirmacao); %>
 			</table>
         </div>
         <div>

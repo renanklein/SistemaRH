@@ -13,6 +13,7 @@ public class Funcionario extends Pessoa{
 	private boolean status;
 	private String processo;
 	private String lotacao;
+	private String regiao;
 	private String localizacao;
 	private int id_especialidade;
 	private String nm_especialidade;
@@ -146,6 +147,14 @@ public class Funcionario extends Pessoa{
 
 	public void setPerfil(String perfil) {
 		this.perfil = perfil;
+	}
+
+	public String getRegiao() {
+		return regiao;
+	}
+
+	public void setRegiao(String regiao) {
+		this.regiao = regiao;
 	}
 
 

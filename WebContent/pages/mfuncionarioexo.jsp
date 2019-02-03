@@ -153,6 +153,7 @@
 						<th>Unidade</th>
 						<th>Lotacao</th>
 						<th>Localizacao</th>
+						<th>Regiao</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -178,6 +179,7 @@
 						<td><%=exo.getUnidade() %></td>
 						<td><%=exo.getLotacao() %></td>
 						<td><%=exo.getLocalizacao() %></td>
+						<td><%=exo.getRegiao() %></td>
 					</tr>
 					<!--
 					<tr>

@@ -18,7 +18,7 @@ public class DAO_RH1 {
 				a.iniciaBd();
 				Connection c = a.getConexao();
 				PreparedStatement ps = (PreparedStatement) c.prepareStatement("SELECT cc.id_concurso_especialidade,cc.cd_chave_candidato,cc.nm_nome_completo ,\r\n" + 
-						"						ce.cd_processo,ce.ds_especialidade,ce.ds_perfil,cc.id_vaga,cc.id_situacao,cc.ds_Unidade,cc.ds_lotacao,cc.ds_localizacao FROM concurso_candidato as cc\r\n" + 
+						"						ce.cd_processo,ce.ds_especialidade,ce.ds_regiao,ce.ds_perfil,cc.id_vaga,cc.id_situacao,cc.ds_Unidade,cc.ds_lotacao,cc.ds_localizacao FROM concurso_candidato as cc\r\n" + 
 						"						JOIN concurso_especialidade as ce on ce.id_concurso_especialidade = cc.id_concurso_especialidade\r\n" + 
 						"					       WHERE cc.id_Matricula =  ?;");
 				ps.setString(1, mat);
@@ -47,6 +47,7 @@ public class DAO_RH1 {
 					func.setUnidade(res1.getString("ds_Unidade"));
 					func.setLotacao(res1.getString("ds_lotacao"));
 					func.setLocalizacao(res1.getString("ds_localizacao"));
+					func.setRegiao(res1.getString("ds_regiao"));
 				}
 				ps.close();
 				c.close();
@@ -100,10 +101,11 @@ public class DAO_RH1 {
 				System.out.println("Executou as querys acima");
 				//Atualizando os dados da tabela de especialidade
 				
-				ps = (PreparedStatement) c.prepareStatement("UPDATE concurso_especialidade SET nu_eliminados_exonerados = nu_eliminados_exonerados + 1 WHERE id_concurso_especialidade = ?");
+				ps = (PreparedStatement) c.prepareStatement("UPDATE concurso_especialidade SET nu_eliminados_exonerados = nu_eliminados_exonerados + 1, nu_vacancia = nu_vacancia +1 WHERE id_concurso_especialidade = ?;");
 				ps.setInt(1,func.getId_especialidade());
 				
 				int teste = ps.executeUpdate();
+				
 				/*//Atualizando o status da vaga que o funcionario ocupava
 				func.getVaga_func().getHist().atualiza_historico(func);
 			

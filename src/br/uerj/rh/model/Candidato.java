@@ -44,6 +44,10 @@ package br.uerj.rh.model;
 			return especialidade;
 		}
 
+		public void setEspecialidade(String especialidade) {
+			this.especialidade = especialidade;
+		}
+
 		public String getRegiao() {
 			return regiao;
 		}
