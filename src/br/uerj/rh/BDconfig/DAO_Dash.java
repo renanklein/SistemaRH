@@ -89,5 +89,35 @@ public class DAO_Dash {
 			return null;
 		}
 	}
+	public static synchronized LinkedList<Usuario> ListarUsuarios() {
+		try {
+			LinkedList<Usuario> Luser = new LinkedList<Usuario>();
+
+			ConexaoBD a = new ConexaoBD();
+			a.iniciaBd();
+			Connection c = a.getConexao();
+			PreparedStatement ps = (PreparedStatement) c.prepareStatement(
+					"SELECT usuario AS usuario, senha AS senha, nm_user AS nome_usuario ,permissao AS permissao\r\n" + 
+					"FROM sistema_usuarios AS c\r\n");
+			ResultSet res = (ResultSet) ps.executeQuery();
+			while (res.next()) {
+				Luser.add(new Usuario(
+						res.getString("usuario"),
+						res.getString("senha"),
+						//res.getString("nome_usuario"),
+						res.getInt("permissao")));
+			}
+
+			ps.close();
+			c.close();
+			a.fechaBd();
+			
+			return Luser;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 }

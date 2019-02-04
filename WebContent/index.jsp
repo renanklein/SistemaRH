@@ -74,13 +74,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="pages/manutencao_usuario.jsp">
                   <span data-feather="users"></span>
                   Manutenção de Usuários
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="pages/Relatorios.jsp">
                   <span data-feather="bar-chart-2"></span>
                   Relatórios
                 </a>

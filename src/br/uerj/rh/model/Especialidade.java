@@ -13,6 +13,7 @@ public class Especialidade {
 	private int qtd_nomeados;
 	private int qtd_exonerados;
 	private int cand_restantes;
+	private String processo;
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -40,6 +41,16 @@ public class Especialidade {
 		}
 		return true;
 	}
+	
+	public Especialidade(int vagas_iniciais, int vacancias, int cand_restantes, int vagas_amplicadas, String processo) {
+		
+		this.vagas_iniciais = vagas_iniciais;
+		this.vacancias = vacancias;
+		this.cand_restantes = cand_restantes;
+		this.vagas_amplicadas = vagas_amplicadas;
+		this.processo = processo;
+	}
+	
 	public String getPerfil() {
 		return perfil;
 	}
@@ -111,6 +122,12 @@ public class Especialidade {
 	}
 	public void setId_concurso(int id_concurso) {
 		this.id_concurso = id_concurso;
+	}
+	public String getProcesso() {
+		return processo;
+	}
+	public void setProcesso(String processo) {
+		this.processo = processo;
 	}
 	
 	
