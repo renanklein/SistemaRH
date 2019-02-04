@@ -7,6 +7,7 @@ public abstract class Pessoa {
 	private String nome;
 	private Calendar data_nascimento;
 	private String chave;
+	private String CPF;
 	private String etnia;
 	private boolean PCD;
 	private String cod_concurso;
@@ -57,6 +58,13 @@ public abstract class Pessoa {
 
 	public void setCod_concurso(String cod_concurso) {
 		this.cod_concurso = cod_concurso;
+	}
+	public String getCPF() {
+		return CPF;
+	}
+
+	public void setCPF(String cPF) {
+		CPF = cPF;
 	}
 	
 }

@@ -60,7 +60,7 @@ public class mfuncionarioexoServlet extends HttpServlet {
 			System.out.println("3");
 			int id_vaga = DAO_RH1.exoneraFunc(f);
 			if(id_vaga < 0 ) {
-				session.setAttribute("menssagem","Funcionario não encontrado");
+				session.setAttribute("menssagem","Vaga do funcionário não encontrada");
 				response.sendRedirect("pages/errorPages/exonerarError.jsp");
 			}
 			else {
