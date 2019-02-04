@@ -50,10 +50,44 @@
 
 		<!--<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>-->
 		<%String msg = (String) session.getAttribute("menssagem"); %>
-		<%ArrayList<Candidato> confirmacao = (ArrayList<Candidato>) session.getAttribute("candidatos");%>
-		<% session.setAttribute("candidato",confirmacao); %>
         <h5><%=msg %></h5>
-		
+		<div class="table-responsive">
+			<table class="table table-striped table-sm">
+				 <thead>
+					<tr>
+						<th>Nome</th>
+						<th>Processo</th>
+						<th>Unidade</th>
+						<th>Perfil</th>
+						<th>Especialidade</th>
+						<th>Regiao</th>
+						<th>Situação</th>
+					</tr>
+				</thead>
+				<%ArrayList<Candidato> confirmacao = (ArrayList<Candidato>) session.getAttribute("candidatos");%>
+				<%for(Candidato c:confirmacao){ %>
+				<tbody>
+					<!--<tr>
+						<td>JOSÉ DA SILVA</td>
+						<td>987.654.321.98</td>
+						<td>37</td>
+						<td>Convocado</td>
+						<td>123456</td>
+					</tr> -->
+					<tr>
+						<td><%=c.getNome() %></td>
+						<td><%=c.getProcesso() %></td>
+						<td><%=c.getUnidade() %></td>
+						<td><%=c.getPerfil() %></td>
+						<td><%=c.getEspecialidade() %></td>
+						<td><%=c.getRegiao() %></td>
+						<td><%=c.getStatus() %></td>
+					</tr>
+				</tbody>
+				<%} %>
+				<% session.setAttribute("candidato",confirmacao); %>
+			</table>
+        </div>
         <div>
 			<span>
 				<input type="button" class="btn btn-primary" id="ok" value="OK" style="margin:15;" onclick="window.location.href= '../../index.jsp'"/>

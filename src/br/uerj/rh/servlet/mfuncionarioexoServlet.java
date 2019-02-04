@@ -3,6 +3,7 @@ package br.uerj.rh.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -82,7 +83,7 @@ public class mfuncionarioexoServlet extends HttpServlet {
 							a.iniciaBd();
 							Connection c = a.getConexao();
 							PreparedStatement ps1 = (PreparedStatement) c.prepareStatement("UPDATE concurso_especialidade "
-									+ "SET nu_vacancia = nu_vacancia -  1 where id_concurso_especialidade = ?");
+									+ "SET nu_vacancia = nu_vacancia - 1,nu_banco_restante = nu_banco_restante - 1 where id_concurso_especialidade = ?");
 							ps1.setInt(1, ca.getId_espec());
 							int teste = ps1.executeUpdate();
 							ps1 = (PreparedStatement) c.prepareStatement("UPDATE concurso_candidato SET id_situacao = ? WHERE cd_chave_candidato = ?;");
@@ -95,6 +96,17 @@ public class mfuncionarioexoServlet extends HttpServlet {
 							System.out.println("Opa, mudou");
 							lcands.get(0).setId_vaga(2);
 							lcands.get(0).setEspecialidade("Convocado");
+							
+							ps1 = (PreparedStatement) c.prepareStatement("INSERT INTO concurso_candidato_historico (id_concurso_especialidade,cd_chave_candidato,id_situacao_antiga,id_situacao_nova,dt_mudanca_situacao) VALUES (?,?,?,?,?);");
+							ps1.setInt(1, ca.getId_espec());
+							ps1.setString(2, ca.getChave());
+							ps1.setInt(3,ca.getId_situacao());
+							ps1.setInt(4,2);
+							Calendar cal = Calendar.getInstance();
+							java.util.Date d = cal.getTime();
+							ps1.setDate(5, new java.sql.Date(d.getTime()));
+							
+							teste = ps1.executeUpdate();
 							
 							ps1.close();
 							c.close();
