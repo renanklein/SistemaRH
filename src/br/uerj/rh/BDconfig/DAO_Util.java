@@ -213,7 +213,9 @@ public class DAO_Util {
 			if(res.next()) {
 				int empate = res.getInt("nu_candidato_posicao_empate");
 				lcands.add(DAO_RH4.getCandidato(res.getString("cd_chave_candidato")));
-				String[] splitChave =  lcands.get(0).getChave().split(":");
+				System.out.println("teste");
+				Candidato cand = lcands.get(0);
+				String[] splitChave = cand.getCPF().split(":");
 				System.out.println("Primeira parte :" + splitChave[0] +" Segunda parte:" +splitChave[1]);
 				
 				if(Integer.parseInt(splitChave[1]) > 0  && empate > 0) {
@@ -246,7 +248,7 @@ public class DAO_Util {
 				if(res2.next()) {
 					int empate = res2.getInt("nu_candidato_posicao_empate");
 					lcands.add(DAO_RH4.getCandidato(res2.getString("cd_chave_candidato")));
-					String[] splitChave =  lcands.get(0).getChave().split(":");
+					String[] splitChave =  lcands.get(0).getCPF().split(":");
 					
 					if(Integer.parseInt(splitChave[1]) > 0  && empate > 0) {
 						System.out.println(Integer.parseInt(splitChave[1]));

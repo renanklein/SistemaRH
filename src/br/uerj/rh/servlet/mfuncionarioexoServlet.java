@@ -77,7 +77,7 @@ public class mfuncionarioexoServlet extends HttpServlet {
 						response.sendRedirect("pages/respPages/ProximoCand.jsp");//Página para mostrar os candidatos que estão aptos a ocupar a v
 					}else {
 						Candidato ca = lcands.get(0);
-						DAO_Util.setStatusVaga(2, f.getIdVaga(), ca.getChave());
+						DAO_Util.setStatusVaga(2, f.getIdVaga(), ca.getCPF());
 						try {
 							ConexaoBD a = new ConexaoBD();
 							a.iniciaBd();
@@ -89,7 +89,7 @@ public class mfuncionarioexoServlet extends HttpServlet {
 							ps1 = (PreparedStatement) c.prepareStatement("UPDATE concurso_candidato SET id_situacao = ? WHERE cd_chave_candidato = ?;");
 							
 							ps1.setInt(1, 2);
-							ps1.setString(2,ca.getChave());
+							ps1.setString(2,ca.getCPF());
 							
 							teste = ps1.executeUpdate();
 							
@@ -99,7 +99,7 @@ public class mfuncionarioexoServlet extends HttpServlet {
 							
 							ps1 = (PreparedStatement) c.prepareStatement("INSERT INTO concurso_candidato_historico (id_concurso_especialidade,cd_chave_candidato,id_situacao_antiga,id_situacao_nova,dt_mudanca_situacao) VALUES (?,?,?,?,?);");
 							ps1.setInt(1, ca.getId_espec());
-							ps1.setString(2, ca.getChave());
+							ps1.setString(2, ca.getCPF());
 							ps1.setInt(3,ca.getId_situacao());
 							ps1.setInt(4,2);
 							Calendar cal = Calendar.getInstance();
