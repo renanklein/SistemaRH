@@ -101,7 +101,7 @@ public class DAO_RH1 {
 				System.out.println("Executou as querys acima");
 				//Atualizando os dados da tabela de especialidade
 				
-				ps = (PreparedStatement) c.prepareStatement("UPDATE concurso_especialidade SET nu_eliminados_exonerados = nu_eliminados_exonerados + 1, nu_vacancia = nu_vacancia +1 WHERE id_concurso_especialidade = ?;");
+				ps = (PreparedStatement) c.prepareStatement("UPDATE concurso_especialidade SET nu_eliminados_exonerados = nu_eliminados_exonerados + 1, nu_vacancia = nu_vacancia +1,nu_nomeados = nu_nomeados - 1 WHERE id_concurso_especialidade = ?;");
 				ps.setInt(1,func.getId_especialidade());
 				
 				int teste = ps.executeUpdate();
