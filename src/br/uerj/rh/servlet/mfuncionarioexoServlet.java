@@ -83,7 +83,11 @@ public class mfuncionarioexoServlet extends HttpServlet {
 							a.iniciaBd();
 							Connection c = a.getConexao();
 							PreparedStatement ps1 = (PreparedStatement) c.prepareStatement("UPDATE concurso_especialidade "
+<<<<<<< HEAD
 									+ "SET nu_banco_restante = nu_banco_restante - 1 where id_concurso_especialidade = ?");
+=======
+									+ "SET nu_vacancia = nu_vacancia - 1,nu_banco_restante = nu_banco_restante - 1 where id_concurso_especialidade = ?");
+>>>>>>> caf089ec85f3adac62bc57b25e744ff3e0f4d856
 							ps1.setInt(1, ca.getId_espec());
 							int teste = ps1.executeUpdate();
 							ps1 = (PreparedStatement) c.prepareStatement("UPDATE concurso_candidato SET id_situacao = ? WHERE cd_chave_candidato = ?;");

@@ -13,7 +13,7 @@
 	<link rel="icon" href="img/favicon.ico">
 	<link rel="Stylesheet" type="text/css" href="pages/css/style.css">
 
-	<title>Manutenção de Usuário</title>
+	<title>Manutenï¿½ï¿½o de Usuï¿½rio</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -27,7 +27,7 @@
     	if(user == null){
     		String mensagem = (String) session.getAttribute("mensagem");
     		if(mensagem == null){
-    			mensagem = "É NECESSÁRIO SE LOGAR PARA ACESSAR O SISTEMA.";
+    			mensagem = "ï¿½ NECESSï¿½RIO SE LOGAR PARA ACESSAR O SISTEMA.";
     			session.setAttribute("mensagem", mensagem);
     		}
     		response.sendRedirect("login.jsp");
@@ -57,31 +57,31 @@
 						<!--<li class="nav-item">
 							<a class="nav-link" href="mconcusos.jsp">
 								<span data-feather="layers"></span>
-								Manutenção de Concursos
+								Manutenï¿½ï¿½o de Concursos
 							</a>
 						</li>  -->
 						<li class="nav-item">
 							<a class="nav-link" href="mfuncionario.jsp">
 								<span data-feather="users"></span>
-								Manutenção de Funcionários
+								Manutenï¿½ï¿½o de Funcionï¿½rios
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="ManutencaoCandidato.jsp">
 								<span data-feather="users"></span>
-								Manutenção de Candidatos
+								Manutenï¿½ï¿½o de Candidatos
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">
 								<span data-feather="users"></span>
-								Manutenção de Usuários
+								Manutenï¿½ï¿½o de Usuï¿½rios
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">
 								<span data-feather="bar-chart-2"></span>
-								Relatórios
+								Relatï¿½rios
 							</a>
 						</li>
 					</ul>
@@ -91,7 +91,7 @@
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
   	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  		<h1 class="h2">Manutenção de Usuários</h1>
+  		<h1 class="h2">Manutenï¿½ï¿½o de Usuï¿½rios</h1>
 		</div>
 
 		<!--<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>-->
@@ -110,7 +110,7 @@
 			  	
 			  </div>
 			  <%if (user.getPermissao() == permissao) {%>
-			  <h4 style="margin-left:-100px;">Usuários Cadastrados</h4>
+			  <h4 style="margin-left:-100px;">Usuï¿½rios Cadastrados</h4>
 			  <input style="margin-left:-100px;" class="btn btn-primary" type="button" onClick="document.getElementById('invisivel_v').setAttribute('style', '');" 
 			  value="Mostrar" />
 			  <input type="button" class="btn btn-danger" onClick="document.getElementById('invisivel_v').setAttribute('style', 'display:none');" 
@@ -119,11 +119,11 @@
 				<table class="table table-striped table-sm">
 				  <thead>
 					<tr>
-					  <th>Usuário</th>
+					  <th>Usuï¿½rio</th>
 					  <!-- <th>Senha</th> -->
-					  <!-- <th>Nome Usuário</th> -->
+					  <!-- <th>Nome Usuï¿½rio</th> -->
 					  <th>Permissao</th>
-					  <th>Nível Permissão</th>
+					  <th>Nï¿½vel Permissï¿½o</th>
 					</tr>
 				  </thead>
 				  <tbody id="invisivel_v" class="table table-striped table-sm" style="">
@@ -146,7 +146,7 @@
 					  	 }  else {
 					  	 
 					  	 	if (pmr == 2) {
-					  	 		out.println("Usuário");
+					  	 		out.println("Usuï¿½rio");
 					  	 		}
 					  	 		
 					  	 }%>
@@ -160,16 +160,16 @@
 			  </div>
 			  
 			  <br>
-				<h4 style="margin-left:-100px;" >Manutenção do Usuário</h4>
+				<h4 style="margin-left:-100px;" >Manutenï¿½ï¿½o do Usuï¿½rio</h4>
 			 
 			  
 			  <div style="margin-left:-100px;" class="table-responsive">
 				<table class="table table-striped table-sm">
 				  <thead>
 					<tr>
-					  <th>Usuário</th>
+					  <th>Usuï¿½rio</th>
 					  <th>Senha</th>
-					  <th>Manutenção</th>
+					  <th>Manutenï¿½ï¿½o</th>
 					</tr>
 				  </thead>
 				  <tbody id="invisivel_v" class="table table-striped table-sm" style="">
@@ -182,7 +182,7 @@
 					  <%if(aux.getPermissao() == permissao){ %>
 					  		<td><input type="button" class="btn btn-secondary" id="excluir" name="excluir" value="User Default" style="margin:15;" disabled/></td>
 					  <%} else {%>
-					  		<td><a href="manutencao_usuario_excluir.jsp?excluirusuario=<%=aux.getUsuario()%>"><input type="submit" class="btn btn-danger" id="excluir" name="excluir" value="Excluir Usuário" style="margin:15;"/></a></td>
+					  		<td><a href="manutencao_usuario_excluir.jsp?excluirusuario=<%=aux.getUsuario()%>"><input type="submit" class="btn btn-danger" id="excluir" name="excluir" value="Excluir Usuï¿½rio" style="margin:15;"/></a></td>
 					  <%} %>
 					</tr>
 					
@@ -193,14 +193,14 @@
 			  </div>
 			  	<br>
 			  	 
-				<h4 style="margin-left:-100px;" >Inserir Novo Usuário</h4>
+				<h4 style="margin-left:-100px;" >Inserir Novo Usuï¿½rio</h4>
 			  
 			  <div style="margin-left:-100px;" class="table-responsive">
 				<table class="table table-striped table-sm">
 				  <tbody id="invisivel_v" class="table table-striped table-sm" style="">
 				  
 					<tr>
-						<td><a href="manutencao_usuario_inserir.jsp?"><input type="submit" class="btn btn-primary" id="inserir" name="inserir" value="Inserir novo Usuário" style="margin:15;"/></a></td>
+						<td><a href="manutencao_usuario_inserir.jsp?"><input type="submit" class="btn btn-primary" id="inserir" name="inserir" value="Inserir novo Usuï¿½rio" style="margin:15;"/></a></td>
 					</tr>
 					
 				  </tbody>
@@ -208,14 +208,14 @@
 			  </div>
 			  
 			  <%} else {%>
-				  <h4 style="margin-left:-100px;" >Manutenção do Usuário</h4>
+				  <h4 style="margin-left:-100px;" >Manutenï¿½ï¿½o do Usuï¿½rio</h4>
 					 
 				  
 				  <div style="margin-left:-100px;" class="table-responsive">
 					<table class="table table-striped table-sm">
 					  <thead>
 						<tr>
-						  <th>Usuário</th>
+						  <th>Usuï¿½rio</th>
 						  <th>Senha</th>
 						</tr>
 					  </thead>
